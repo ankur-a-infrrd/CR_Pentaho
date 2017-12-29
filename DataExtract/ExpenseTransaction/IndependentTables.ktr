@@ -882,7 +882,11 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_UserDefinedDataPivot WHERE &lt;conditions></sql>
+    <sql>select Count(*) from ((select uddp.* from tbl_UserDefinedDataPivot uddp where uddp.ExpenseReportLineItemID is null and uddp.ExpenseReportHeaderID is null) 
+	union 
+(select uddp.* from tbl_UserDefinedDataPivot uddp join tbl_ExpenseReportHeader erh using (ExpenseReportHeaderID) where erh.CreateDate >= date_add(current_timestamp, interval -6 month)) 
+	union 
+(select uddp.* from tbl_UserDefinedDataPivot uddp join tbl_ExpenseReportLineItem erli using (ExpenseReportLineItemID) where erli.CreateDate >= date_add(current_timestamp, interval -6 month))) t where CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -896,8 +900,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>193</xloc>
-      <yloc>700</yloc>
+      <xloc>176</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

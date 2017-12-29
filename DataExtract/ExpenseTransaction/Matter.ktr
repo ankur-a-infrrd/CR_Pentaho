@@ -564,7 +564,10 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_Matter WHERE CustomerID = ${CUSTOMERID} AND (ClosedDate is null OR ClosedDate >= date_sub(now(), interval 6 month));</sql>
+    <sql>Select * From (
+SELECT * FROM tbl_Matter WHERE CustomerID = ${CUSTOMERID} AND (ClosedDate is null OR ClosedDate >= date_sub(now(), interval 6 month))
+UNION ALL
+SELECT m.* FROM tbl_Matter m JOIN tbl_CustomerData cd ON m.MatterID=cd.PersonalMatterID WHERE m.CustomerID = ${CUSTOMERID} AND m.ClosedDate &lt; date_add(now(), interval -6 month)) t;</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
