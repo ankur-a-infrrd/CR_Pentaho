@@ -17,6 +17,61 @@
       <description />
     </parameter>
   </parameters>
+  <connection>
+    <name>cr_dest</name>
+    <server>${CHROMERIVER_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
+    <port>${CHROMERIVER_DB_PORT}</port>
+    <username>${CHROMERIVER_DB_USERNAME}</username>
+    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -313,7 +368,7 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>PrepareRefData1</name>
+      <name>ktr - PrepareRefData1</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -345,7 +400,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>422</xloc>
+      <xloc>396</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -381,7 +436,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>577</xloc>
+      <xloc>538</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -417,7 +472,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>732</xloc>
+      <xloc>680</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -453,7 +508,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1042</xloc>
+      <xloc>1296</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -499,7 +554,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1197</xloc>
+      <xloc>1456</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -540,7 +595,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
+      <xloc>254</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -578,7 +633,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
+      <xloc>822</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -616,13 +671,109 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1360</xloc>
+      <xloc>1648</xloc>
       <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>kjb - FinancialEntityCustomerConfig</name>
+      <description />
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id />
+      <filename>D:\CR_Pentaho\DataExtract\FinancialEntityCustomerConfig\FinancialEntityCustomerConfig.kjb</filename>
+      <jobname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name />
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>SQL</name>
+      <description />
+      <type>SQL</type>
+      <sql>SET FOREIGN_KEY_CHECKS = 1;
+commit;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_dest</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1168</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>ktr - TablesWithoutCustomerID</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Entry.Current.Directory}/TablesWithoutCustomerID.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1648</xloc>
+      <yloc>240</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>PrepareRefData1</from>
+      <from>ktr - PrepareRefData1</from>
       <to>PrepareRefData2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -659,7 +810,7 @@
     </hop>
     <hop>
       <from>Initial Table Load</from>
-      <to>PrepareRefData1</to>
+      <to>ktr - PrepareRefData1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -676,7 +827,34 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
+      <from>PopulateCRTables</from>
+      <to>ExpenseReportDataExtractJob</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
       <from>StateCityLanguage</from>
+      <to>kjb - FinancialEntityCustomerConfig</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>kjb - FinancialEntityCustomerConfig</from>
+      <to>SQL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>SQL</from>
       <to>GetCRTableNameFromCSV</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -685,8 +863,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>PopulateCRTables</from>
-      <to>ExpenseReportDataExtractJob</to>
+      <from>ExpenseReportDataExtractJob</from>
+      <to>ktr - TablesWithoutCustomerID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

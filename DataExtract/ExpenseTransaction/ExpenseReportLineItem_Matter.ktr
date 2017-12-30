@@ -547,13 +547,13 @@
   </connection>
   <order>
     <hop>
-      <from>Table input tbl_ExpenseReportLineItem_Matter</from>
+      <from>TI - tbl_ExpenseReportLineItem_Matter</from>
       <to>Table output tbl_ExpenseReportLineItem_Matter</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Table input tbl_ExpenseReportLineItem_Matter</name>
+    <name>TI - tbl_ExpenseReportLineItem_Matter</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
