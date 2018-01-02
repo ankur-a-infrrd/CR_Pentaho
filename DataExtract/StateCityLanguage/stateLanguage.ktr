@@ -564,7 +564,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * from tbl_StateLanguage sl JOIN tbl_State s on s.StateID = sl.StateID where s.CustomerID = ${CUSTOMERID};</sql>
+    <sql>SELECT * from tbl_StateLanguage sl JOIN tbl_State s ON s.StateID = sl.StateID WHERE s.CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -596,7 +596,7 @@
     </partitioning>
     <connection>cr_dest</connection>
     <schema>${CHROMERIVER_DB_NAME_DESTINATION}</schema>
-    <table>tbl_statelanguage</table>
+    <table>tbl_StateLanguage</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>

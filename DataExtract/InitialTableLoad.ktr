@@ -565,7 +565,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_customer WHERE (CustomerID = ${CUSTOMERID} || CustomerID = 0);</sql>
+    <sql>SELECT * FROM tbl_Customer WHERE (CustomerID = ${CUSTOMERID} || CustomerID = 0);</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>

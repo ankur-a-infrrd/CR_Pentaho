@@ -430,7 +430,7 @@
     <created_date>2017/12/29 12:18:41.462</created_date>
     <modified_user>-</modified_user>
     <modified_date>2017/12/29 12:18:41.462</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -564,7 +564,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_financialentitycustomerconfig WHERE CustomerID = ${CUSTOMERID};
+    <sql>SELECT * FROM tbl_FinancialEntityCustomerConfig WHERE CustomerID = ${CUSTOMERID};
 
 </sql>
     <limit>0</limit>

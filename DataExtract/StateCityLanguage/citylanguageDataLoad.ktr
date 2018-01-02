@@ -493,13 +493,13 @@
   </connection>
   <connection>
     <name>cr_source</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <server>db01.dev.chromeriver.com</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_SOURCE}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>chrome_expense</database>
+    <port>3306</port>
+    <username>chrome_dev</username>
+    <password>Encrypted 2be98afc86aa79a8bbe0aab408a80bbc3</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -518,7 +518,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>3306</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -565,7 +565,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_citylanguage WHERE CityID IN (SELECT CityID FROM tbl_city WHERE CustomerID = ${CUSTOMERID});</sql>
+    <sql>SELECT * FROM tbl_CityLanguage WHERE CityID IN (SELECT CityID FROM tbl_City WHERE CustomerID = ${CUSTOMERID});</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -597,7 +597,7 @@
     </partitioning>
     <connection>cr_dest</connection>
     <schema>${CHROMERIVER_DB_NAME_DESTINATION}</schema>
-    <table>tbl_citylanguage</table>
+    <table>tbl_CityLanguage</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>

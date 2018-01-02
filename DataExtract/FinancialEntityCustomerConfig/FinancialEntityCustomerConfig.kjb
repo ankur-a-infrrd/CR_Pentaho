@@ -49,6 +49,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET foreign_key_checks = 0;</attribute>
+      </attribute>
+      <attribute>
         <code>STREAM_RESULTS</code>
         <attribute>Y</attribute>
       </attribute>
@@ -358,8 +362,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>208</yloc>
+      <xloc>112</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>ktr - BatchProcessUserData</name>
@@ -399,8 +403,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>208</yloc>
+      <xloc>336</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>ktr - FinancialEntity</name>
@@ -440,8 +444,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>848</xloc>
-      <yloc>208</yloc>
+      <xloc>608</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>ktr_FinancialEntityCustomerconfig</name>
@@ -481,8 +485,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1048</xloc>
-      <yloc>208</yloc>
+      <xloc>800</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>SQL</name>
@@ -498,8 +502,8 @@ commit;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
-      <yloc>208</yloc>
+      <xloc>1008</xloc>
+      <yloc>96</yloc>
     </entry>
   </entries>
   <hops>
