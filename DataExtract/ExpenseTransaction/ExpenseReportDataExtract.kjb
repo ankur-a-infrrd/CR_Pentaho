@@ -351,7 +351,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>544</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>LineItemUserDefinedData</name>
@@ -392,7 +392,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>368</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>ExpenseReportHeader</name>
@@ -474,7 +474,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>704</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>Matter</name>
@@ -515,7 +515,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>832</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>ExpenseReportLineItemStep</name>
@@ -556,7 +556,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>176</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>IndependentTables</name>
@@ -638,7 +638,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>176</xloc>
-      <yloc>416</yloc>
+      <yloc>432</yloc>
     </entry>
     <entry>
       <name>PaidExpense</name>
@@ -679,7 +679,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>272</yloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>InvoiceHeader</name>

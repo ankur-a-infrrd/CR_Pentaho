@@ -430,7 +430,7 @@
     <created_date>2017/12/29 15:13:31.783</created_date>
     <modified_user>-</modified_user>
     <modified_date>2017/12/29 15:13:31.783</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -471,6 +471,10 @@
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET foreign_key_checks = 0;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
@@ -589,7 +593,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * from tbl_CreditCardTransactionDetail cctd JOIN tbl_ExpenseTransaction et on cctd.ExpenseTransactionID = et.ExpenseTransactionID where et.CustomerID = ${CUSTOMERID};</sql>
+    <sql>SELECT cctd.* from tbl_CreditCardTransactionDetail cctd JOIN tbl_ExpenseTransaction et on cctd.ExpenseTransactionID = et.ExpenseTransactionID where et.CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -604,49 +608,6 @@
     </remotesteps>
     <GUI>
       <xloc>192</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TO - tbl_creditcardtransactiondetail</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_dest</connection>
-    <schema>${CHROMERIVER_DB_NAME_DESTINATION}</schema>
-    <table>tbl_creditcardtransactiondetail</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -679,6 +640,176 @@
     <GUI>
       <xloc>200</xloc>
       <yloc>266</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI - tbl_expenseexportdata</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_source</connection>
+    <sql>SELECT eed.* from tbl_ExpenseExportData eed JOIN tbl_ExpenseReportLineItem erli on eed.ExpenseReportLineItemID = erli.ExpenseReportLineItemID where erli.CustomerID = ${CUSTOMERID};</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI - tbl_feedgroup</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_source</connection>
+    <sql>SELECT fg.* FROM tbl_FeedGroup fg JOIN tbl_Feed f ON fg.FeedID = f.FeedID WHERE f.CustomerID = ${CUSTOMERID};</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>204</xloc>
+      <yloc>517</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI - tbl_preload_staged_reference</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_source</connection>
+    <sql>SELECT * FROM (
+SELECT psr.* FROM tbl_PreLoad_Staged_Reference psr JOIN tbl_ExpenseTransaction_PreLoad etpl ON psr.ExpenseTransactionPreLoadID = etpl.ExpenseTransactionPreLoadID WHERE etpl.CustomerID = ${CUSTOMERID}
+UNION ALL
+SELECT psr.* FROM tbl_PreLoad_Staged_Reference psr JOIN tbl_StagedTransaction st ON psr.StagedTransactionID = st.StagedTransactionID WHERE st.CustomerID = ${CUSTOMERID}) t;</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>197</xloc>
+      <yloc>658</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI - tbl_tcagroupmapping</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_source</connection>
+    <sql>SELECT tgm.* FROM tbl_TCAGroupMapping tgm JOIN tbl_TransactionCorporateAccountGroup tcag ON tgm.TransactionCorporateAccountGroupID = tcag.TransactionCorporateAccountGroupID WHERE tcag.CustomerID = ${CUSTOMERID};</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>212</xloc>
+      <yloc>790</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TO - tbl_creditcardtransactiondetail</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_dest</connection>
+    <schema>${CHROMERIVER_DB_NAME_DESTINATION}</schema>
+    <table>tbl_CreditCardTransactionDetail</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -726,37 +857,6 @@
     </GUI>
   </step>
   <step>
-    <name>TI - tbl_expenseexportdata</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_source</connection>
-    <sql>SELECT eed.* from tbl_ExpenseExportData eed JOIN tbl_ExpenseReportLineItem erli on eed.ExpenseReportLineItemID = erli.ExpenseReportLineItemID where erli.CustomerID = ${CUSTOMERID};</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>TO - tbl_expenseexportdata</name>
     <type>TableOutput</type>
     <description />
@@ -796,37 +896,6 @@
     <GUI>
       <xloc>504</xloc>
       <yloc>382</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TI - tbl_feedgroup</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_source</connection>
-    <sql>SELECT fg.* FROM tbl_FeedGroup fg JOIN tbl_Feed f ON fg.FeedID = f.FeedID WHERE f.CustomerID = ${CUSTOMERID};</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>204</xloc>
-      <yloc>517</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -874,40 +943,6 @@
     </GUI>
   </step>
   <step>
-    <name>TI - tbl_preload_staged_reference</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_source</connection>
-    <sql>SELECT * FROM (
-SELECT psr.* FROM tbl_PreLoad_Staged_Reference psr JOIN tbl_ExpenseTransaction_PreLoad etpl ON psr.ExpenseTransactionPreLoadID = etpl.ExpenseTransactionPreLoadID WHERE etpl.CustomerID = ${CUSTOMERID}
-UNION ALL
-SELECT psr.* FROM tbl_PreLoad_Staged_Reference psr JOIN tbl_StagedTransaction st ON psr.StagedTransactionID = st.StagedTransactionID WHERE st.CustomerID = ${CUSTOMERID}) t;</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>197</xloc>
-      <yloc>658</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>TO - tbl_preload_staged_reference</name>
     <type>TableOutput</type>
     <description />
@@ -947,37 +982,6 @@ SELECT psr.* FROM tbl_PreLoad_Staged_Reference psr JOIN tbl_StagedTransaction st
     <GUI>
       <xloc>501</xloc>
       <yloc>658</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TI - tbl_tcagroupmapping</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_source</connection>
-    <sql>SELECT tgm.* FROM tbl_TCAGroupMapping tgm JOIN tbl_TransactionCorporateAccountGroup tcag ON tgm.TransactionCorporateAccountGroupID = tcag.TransactionCorporateAccountGroupID WHERE tcag.CustomerID = ${CUSTOMERID};</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>212</xloc>
-      <yloc>790</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

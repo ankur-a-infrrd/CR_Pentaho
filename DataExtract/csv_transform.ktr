@@ -459,7 +459,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <filename>C:\Users\ankur\Desktop\cr_customer_tables.csv</filename>
+    <filename>${Internal.Job.Filename.Name}\cr_customer_tables.csv</filename>
     <filename_field />
     <rownum_field />
     <include_filename>N</include_filename>
@@ -517,7 +517,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>640</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>

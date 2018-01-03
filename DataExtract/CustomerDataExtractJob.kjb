@@ -13,69 +13,10 @@
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
-      <default_value>306</default_value>
+      <default_value />
       <description />
     </parameter>
   </parameters>
-  <connection>
-    <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
-    <servername />
-    <data_tablespace />
-    <index_tablespace />
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SQL_CONNECT</code>
-        <attribute>SET foreign_key_checks = 0;</attribute>
-      </attribute>
-      <attribute>
-        <code>STREAM_RESULTS</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -377,7 +318,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PrepareRefData1.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PrepareRefData1.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -413,7 +354,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PrepareRefData2.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PrepareRefData2.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -449,7 +390,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PrepareRefData3.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PrepareRefData3.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -485,7 +426,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/csv_transform.ktr</filename>
+      <filename>${Internal.Job.Repository.Directory}/csv_transform.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -521,7 +462,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PopulateCRTables.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PopulateCRTables.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>Y</params_from_previous>
@@ -567,7 +508,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/InitialTableLoad.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/InitialTableLoad.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -608,7 +549,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>D:\CR_Pentaho\DataExtract\StateCityLanguage\StateCityLanguageJob.kjb</filename>
+      <filename>${Internal.Job.Filename.Directory}/StateCityLanguage/StateCityLanguageJob.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -646,7 +587,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>D:\CR_Pentaho\DataExtract\ExpenseTransaction\ExpenseReportDataExtract.kjb</filename>
+      <filename>${Internal.Job.Filename.Directory}\ExpenseTransaction\ExpenseReportDataExtract.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -684,7 +625,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>D:\CR_Pentaho\DataExtract\FinancialEntityCustomerConfig\FinancialEntityCustomerConfig.kjb</filename>
+      <filename>${Internal.Job.Filename.Directory}\FinancialEntityCustomerConfig\FinancialEntityCustomerConfig.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -717,29 +658,12 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>SQL</name>
-      <description />
-      <type>SQL</type>
-      <sql>SET GLOBAL FOREIGN_KEY_CHECKS = 1;
-commit;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename />
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cr_dest</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>608</yloc>
-    </entry>
-    <entry>
       <name>ktr - TablesWithoutCustomerID</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/TablesWithoutCustomerID.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/TablesWithoutCustomerID.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -773,23 +697,6 @@ commit;</sql>
       <nr>0</nr>
       <xloc>1168</xloc>
       <yloc>240</yloc>
-    </entry>
-    <entry>
-      <name>SQL (2)</name>
-      <description />
-      <type>SQL</type>
-      <sql>SET GLOBAL FOREIGN_KEY_CHECKS = 0;
-commit;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename />
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cr_dest</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>1</nr>
-      <xloc>1072</xloc>
-      <yloc>624</yloc>
     </entry>
   </entries>
   <hops>
