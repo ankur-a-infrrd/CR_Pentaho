@@ -459,7 +459,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <filename>${Internal.Job.Filename.Name}\cr_customer_tables.csv</filename>
+    <filename>${Internal.Job.Filename.Directory}\cr_customer_tables.csv</filename>
     <filename_field />
     <rownum_field />
     <include_filename>N</include_filename>
