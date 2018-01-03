@@ -13,7 +13,7 @@
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
-      <default_value />
+      <default_value>73</default_value>
       <description />
     </parameter>
   </parameters>
