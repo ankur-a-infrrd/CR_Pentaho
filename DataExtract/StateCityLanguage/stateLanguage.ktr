@@ -473,6 +473,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET foreign_key_checks = 0;</attribute>
+      </attribute>
+      <attribute>
         <code>STREAM_RESULTS</code>
         <attribute>Y</attribute>
       </attribute>
@@ -564,7 +568,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * from tbl_StateLanguage sl JOIN tbl_State s ON s.StateID = sl.StateID WHERE s.CustomerID = ${CUSTOMERID};</sql>
+    <sql>SELECT sl.* from tbl_StateLanguage sl JOIN tbl_State s ON s.StateID = sl.StateID WHERE s.CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
