@@ -568,7 +568,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT sl.* from tbl_StateLanguage sl JOIN tbl_State s ON s.StateID = sl.StateID WHERE s.CustomerID = ${CUSTOMERID};</sql>
+    <sql>SELECT stl.* from tbl_StateLanguage stl JOIN tbl_State s ON s.StateID = stl.StateID WHERE s.CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>

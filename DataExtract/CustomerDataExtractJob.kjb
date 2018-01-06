@@ -11,12 +11,7 @@
   <modified_user>-</modified_user>
   <modified_date>2017/12/25 05:55:18.611</modified_date>
   <parameters>
-    <parameter>
-      <name>CUSTOMERID</name>
-      <default_value>73</default_value>
-      <description />
-    </parameter>
-  </parameters>
+    </parameters>
   <slaveservers>
     </slaveservers>
   <job-log-table>
