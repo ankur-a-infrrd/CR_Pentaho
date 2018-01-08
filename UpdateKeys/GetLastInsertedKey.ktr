@@ -440,70 +440,6 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
-    <notepad>
-      <note>24
-</note>
-      <xloc>368</xloc>
-      <yloc>160</yloc>
-      <width>27</width>
-      <heigth>50</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>1</note>
-      <xloc>816</xloc>
-      <yloc>256</yloc>
-      <width>20</width>
-      <heigth>30</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>24+1 = 25</note>
-      <xloc>1392</xloc>
-      <yloc>160</yloc>
-      <width>79</width>
-      <heigth>30</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <connection>
     <name>cr_cust_fk_check_on</name>
@@ -787,8 +723,8 @@ AND   TABLE_NAME   = '${TABLE_NAME}';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1872</xloc>
-      <yloc>80</yloc>
+      <xloc>1632</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -810,17 +746,7 @@ AND   TABLE_NAME   = '${TABLE_NAME}';</sql>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
-
-
-println("@@@@@@@@@@@@@@@@@@@@@ "+count);
-
-
-
-
-
-var x = count;
-
-println("HHHHHHHHHHHHHHHH "+x);</jsScript_script>
+var x = count;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -841,8 +767,8 @@ println("HHHHHHHHHHHHHHHH "+x);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1376</xloc>
-      <yloc>80</yloc>
+      <xloc>1232</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -962,7 +888,7 @@ println("HHHHHHHHHHHHHHHH "+x);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>816</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -993,8 +919,8 @@ println("HHHHHHHHHHHHHHHH "+x);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1584</xloc>
-      <yloc>80</yloc>
+      <xloc>1440</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1020,7 +946,7 @@ println("HHHHHHHHHHHHHHHH "+x);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>816</xloc>
-      <yloc>128</yloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
