@@ -12,6 +12,65 @@
   <modified_date>2018/01/07 01:22:06.540</modified_date>
   <parameters>
     </parameters>
+  <connection>
+    <name>cr_cust_fk_check_off</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>chrome_expense_cust</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -320,7 +379,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>528</xloc>
       <yloc>48</yloc>
     </entry>
     <entry>
@@ -361,7 +420,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
+      <xloc>752</xloc>
       <yloc>48</yloc>
     </entry>
     <entry>
@@ -384,6 +443,22 @@
       <xloc>80</xloc>
       <yloc>48</yloc>
     </entry>
+    <entry>
+      <name>remove state entries with zero customerID</name>
+      <description />
+      <type>SQL</type>
+      <sql>DELETE FROM tbl_State WHERE CustomerID = 0;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_off</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>48</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -397,6 +472,15 @@
     </hop>
     <hop>
       <from>START</from>
+      <to>remove state entries with zero customerID</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>remove state entries with zero customerID</from>
       <to>GetTableNames</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

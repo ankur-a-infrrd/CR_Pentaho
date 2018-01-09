@@ -521,7 +521,40 @@
     <sql>select table_name from information_schema.columns
                              where table_schema = 'chrome_expense'
                                    and column_key = 'PRI'
-                                   and data_type = 'int' and extra = 'auto_increment' and table_name in ('tbl_analyticsgroups');</sql>
+                                   and data_type = 'int' and extra = 'auto_increment' and table_name not in ('tbl_creditcardtype',
+'tbl_GuestType',
+'tbl_MetaData_Tables',
+'tbl_Provider',
+'tbl_countrylanguage',
+'tbl_FeedProviderConfig',
+'tbl_ProviderTnC',
+'tbl_ReportDefinitionColumn',
+'tbl_ReportDefinitionFilter',
+'tbl_EmailTemplate',
+'tbl_HCPGuest',
+'tbl_HealthCareProvider',
+'tbl_ImageButtonsFiles',
+'tbl_LegalHoliday',
+'tbl_z_RoutingRequeue',
+'tbl_MetaData_Columns',
+'tbl_ModulusWeight',
+'tbl_SortingCodeSubstitution',
+'z_umsg',
+'tbl_BatchTransition',
+'tbl_CustomerFeedBatch',
+'tbl_Email',
+'tbl_EmailAttachment',
+'tbl_ParentImage',
+'tbl_InvoiceImage',
+'tbl_ImageGroup',
+'tbl_ExpenseImage',
+'tbl_CustomerDirectPayBankAccount',
+'tbl_PersonDirectPayCreditCard',
+'tbl_PersonDirectPayBankAccount',
+'tbl_CustomerPublicKey','tbl_KratosEntity','tbl_KratosMachine','tbl_AuthorizedUser','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_CustomerFeedBatchQueue','tbl_EInvoiceQueue','tbl_ExpenseReportAuditQueueEntryRouting',
+'tbl_MatterFiltersQueue','tbl_PAQueueEntryRouting','tbl_QueueCorpAccountReport','tbl_QueueEntry','tbl_QueueEntryDirectPay','tbl_QueueEntryDirectPayExportCustomer','tbl_QueueEntryDirectPayLineItem','tbl_QueueEntryEmail',
+'tbl_QueueEntryEmailDownload','tbl_QueueEntryExpenseExport','tbl_QueueEntryExpenseExport2','tbl_QueueEntryExpenseTransactionPreLoadProcess','tbl_QueueEntryManagedReporting','tbl_QueueEntryNetZeroReport',
+'tbl_QueueEntryNewInvoice','tbl_QueueEntryPayment','tbl_QueueEntryReceipts','tbl_QueueEntryRouting','tbl_QueueEntrySolrIndexing','tbl_QueueEntryYodlee','tbl_QueueImageRequestHeader');</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>

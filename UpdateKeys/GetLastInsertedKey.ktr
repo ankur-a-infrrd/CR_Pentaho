@@ -746,7 +746,7 @@ AND   TABLE_NAME   = '${TABLE_NAME}';</sql>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
-var x = count;</jsScript_script>
+var x = count+10;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -799,7 +799,7 @@ var x = count;</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>192</xloc>
-      <yloc>368</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -841,7 +841,7 @@ var x = count;</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>464</xloc>
-      <yloc>368</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -889,7 +889,7 @@ var x = count;</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>816</xloc>
-      <yloc>368</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
