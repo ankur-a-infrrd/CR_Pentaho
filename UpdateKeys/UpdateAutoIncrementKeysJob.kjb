@@ -383,12 +383,12 @@
       <yloc>48</yloc>
     </entry>
     <entry>
-      <name>GetLastInsertedKey</name>
+      <name>GetUpdateLastInsertedKey</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/GetLastInsertedKey.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/GetLastInsertedKey.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -444,7 +444,7 @@
       <yloc>48</yloc>
     </entry>
     <entry>
-      <name>remove state entries with zero customerID</name>
+      <name>Delete state entries with zero customerID</name>
       <description />
       <type>SQL</type>
       <sql>DELETE FROM tbl_State WHERE CustomerID = 0;</sql>
@@ -463,7 +463,7 @@
   <hops>
     <hop>
       <from>GetTableNames</from>
-      <to>GetLastInsertedKey</to>
+      <to>GetUpdateLastInsertedKey</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -472,7 +472,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>remove state entries with zero customerID</to>
+      <to>Delete state entries with zero customerID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -480,7 +480,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>remove state entries with zero customerID</from>
+      <from>Delete state entries with zero customerID</from>
       <to>GetTableNames</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
