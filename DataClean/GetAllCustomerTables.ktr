@@ -441,7 +441,7 @@
     <server>${CHROMERIVER_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
+    <database>chrome_expense</database>
     <port>${CHROMERIVER_DB_PORT}</port>
     <username>${CHROMERIVER_DB_USERNAME}</username>
     <password>${CHROMERIVER_DB_PASSWORD}</password>
@@ -577,7 +577,9 @@
     <sql>SELECT DISTINCT TABLE_NAME 
     FROM INFORMATION_SCHEMA.COLUMNS
     WHERE COLUMN_NAME IN ('CustomerID')
-        AND TABLE_SCHEMA='${CHROMERIVER_DB_NAME_DESTINATION}' AND TABLE_NAME LIKE 'tbl_%';</sql>
+        AND TABLE_SCHEMA='${CHROMERIVER_DB_NAME_DESTINATION}' AND TABLE_NAME LIKE 'tbl_%' AND TABLE_NAME not in ('tbl_CustomerDirectPayBankAccount',
+'tbl_PersonDirectPayCreditCard','tbl_PersonDirectPayBankAccount','tbl_PersonYodleeCreditCard','tbl_QueueEntryDirectPayExportCustomer','tbl_CustomerPublicKey','tbl_PublicKey','tbl_KratosEntity',
+'tbl_KratosMachine','tbl_AuthorizedUser','tbl_CustomerSamlSSO','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_EncryptedPersonLookup');</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -591,7 +593,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>304</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
