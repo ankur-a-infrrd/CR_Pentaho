@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>GetLastInsertedKey</name>
+    <name>UpdateBusinessRuleImpl</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>TABLE_NAME</name>
-        <default_value />
-        <description />
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -433,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/01/07 01:24:41.789</created_date>
+    <created_date>2018/01/12 14:04:30.673</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/01/07 01:24:41.789</modified_date>
+    <modified_date>2018/01/12 14:04:30.673</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -561,49 +555,44 @@
   </connection>
   <order>
     <hop>
-      <from>Sum</from>
-      <to>Add buffer to Sum</to>
+      <from>Table input</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get Last Update Key Value - dest schema</from>
-      <to>Select auto_increment value</to>
+      <from>Select values</from>
+      <to>Execute SQL script</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select auto_increment value</from>
-      <to>Get Table Row Count</to>
+      <from>Execute SQL script</from>
+      <to>Table input 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get Table Row Count</from>
-      <to>Sum</to>
+      <from>Table input 2</from>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add buffer to Sum</from>
-      <to>Update Auto Increment value</to>
+      <from>Select values 2</from>
+      <to>Database join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select auto_increment</from>
-      <to>Get id column name</to>
+      <from>Database join</from>
+      <to>Select values 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Update Auto Increment value</from>
-      <to>Select auto_increment</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get id column name</from>
-      <to>Update Auto Increment Value 2</to>
+      <from>Select values 3</from>
+      <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Sum</name>
-    <type>Calculator</type>
+    <name>Database join</name>
+    <type>DBJoin</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -612,21 +601,28 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <calculation>
-      <field_name>sum</field_name>
-      <calc_type>ADD</calc_type>
-      <field_a>Count(*)</field_a>
-      <field_b>auto_increment</field_b>
-      <field_c />
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
+    <connection>cr_dest</connection>
+    <rowlimit>0</rowlimit>
+    <sql>SELECT * FROM tbl_BusinessRulesImpl WHERE CustomerID=${CUSTOMERID} 
+AND TYPE IN (?) 
+AND isCurrent IN (?) 
+AND version > ?;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+      <field>
+        <name>cec_Type</name>
+        <type>String</type>
+      </field>
+      <field>
+        <name>cec_IsCurrent</name>
+        <type>Boolean</type>
+      </field>
+      <field>
+        <name>cec_Version</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -635,14 +631,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>64</yloc>
+      <xloc>896</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Get Table Row Count</name>
-    <type>TableInput</type>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -652,12 +648,35 @@
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_off</connection>
-    <sql>SELECT Count(*),? as auto_increment FROM ${TABLE_NAME};</sql>
-    <limit>0</limit>
-    <lookup>Select auto_increment value</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>UPDATE tbl_BusinessRulesImpl SET isCurrent = 0 
+WHERE isCurrent=1 AND CustomerID=${CUSTOMERID} 
+AND TYPE IN (?) 
+AND drltext NOT IN (?) 
+AND isCurrent IN (?) 
+AND version &lt; ?;</sql>
+    <set_params>Y</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>Type</name>
+      </argument>
+      <argument>
+        <name>DrlText</name>
+      </argument>
+      <argument>
+        <name>IsCurrent</name>
+      </argument>
+      <argument>
+        <name>Version</name>
+      </argument>
+    </arguments>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -666,13 +685,154 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>64</yloc>
+      <xloc>480</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Get Last Update Key Value - dest schema</name>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>Type</name>
+      </field>
+      <field>
+        <name>DrlText</name>
+      </field>
+      <field>
+        <name>IsCurrent</name>
+      </field>
+      <field>
+        <name>Version</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>334</xloc>
+      <yloc>82</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>Type</name>
+        <rename>cec_Type</rename>
+      </field>
+      <field>
+        <name>IsCurrent</name>
+        <rename>cec_IsCurrent</rename>
+      </field>
+      <field>
+        <name>Version</name>
+        <rename>cec_Version</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>CustomerID</name>
+        <rename />
+      </field>
+      <field>
+        <name>Type</name>
+        <rename />
+      </field>
+      <field>
+        <name>Version</name>
+        <rename />
+      </field>
+      <field>
+        <name>DrlText</name>
+        <rename />
+      </field>
+      <field>
+        <name>IsCurrent</name>
+        <rename />
+      </field>
+      <field>
+        <name>CreateDate</name>
+        <rename />
+      </field>
+      <field>
+        <name>UpdateDate</name>
+        <rename />
+      </field>
+      <field>
+        <name>PkgData</name>
+        <rename />
+      </field>
+      <field>
+        <name>PersonID</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -683,10 +843,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_dest</connection>
-    <sql>SELECT AUTO_INCREMENT
-FROM  INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = 'chrome_expense'
-AND   TABLE_NAME   = '${TABLE_NAME}';</sql>
+    <sql>SELECT * FROM tbl_BusinessRulesImpl WHERE CustomerID = ${CUSTOMERID};</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -700,177 +857,13 @@ AND   TABLE_NAME   = '${TABLE_NAME}';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>64</yloc>
+      <xloc>206</xloc>
+      <yloc>82</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select auto_increment value</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>AUTO_INCREMENT</name>
-        <rename>auto_increment</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>auto_increment</name>
-        <rename>auto_increment</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update Auto Increment value</name>
-    <type>ExecSQL</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_dest</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>ALTER TABLE ${TABLE_NAME} AUTO_INCREMENT = ?;</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-      <argument>
-        <name>updateKey</name>
-      </argument>
-    </arguments>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add buffer to Sum</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var updateKey = sum + 10;</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>updateKey</name>
-        <rename>updateKey</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select auto_increment</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>auto_increment</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get id column name</name>
+    <name>Table input 2</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -881,12 +874,9 @@ var updateKey = sum + 10;</jsScript_script>
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_off</connection>
-    <sql>select COLUMN_NAME,? as auto_increment FROM information_schema.columns
-	WHERE table_schema = 'chrome_expense_cust'
-    AND column_key = 'PRI'
-    AND data_type = 'int' AND extra = 'auto_increment' and table_name='tbl_expensetransactionmappingpta';</sql>
+    <sql>SELECT * FROM tbl_BusinessRulesImplBackup WHERE CustomerID=${CUSTOMERID};</sql>
     <limit>0</limit>
-    <lookup>Select auto_increment</lookup>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
@@ -898,14 +888,14 @@ var updateKey = sum + 10;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1248</xloc>
-      <yloc>64</yloc>
+      <xloc>656</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Update Auto Increment Value 2</name>
-    <type>ExecSQL</type>
+    <name>Table output</name>
+    <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -915,26 +905,24 @@ var updateKey = sum + 10;</jsScript_script>
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_off</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>UPDATE tbl_expensetransactionmappingpta
-JOIN (SELECT @rank := ?) r
-SET ?=@rank:=@rank+1;</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-      <argument>
-        <name>auto_increment</name>
-      </argument>
-      <argument>
-        <name>COLUMN_NAME</name>
-      </argument>
-    </arguments>
+    <schema>chrome_expense_cust</schema>
+    <table>tbl_BusinessRulesImpl</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+    </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -943,8 +931,8 @@ SET ?=@rank:=@rank+1;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1440</xloc>
-      <yloc>64</yloc>
+      <xloc>1120</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
