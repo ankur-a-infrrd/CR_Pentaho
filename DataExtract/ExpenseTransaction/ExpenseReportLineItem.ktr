@@ -436,14 +436,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -462,7 +462,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -474,7 +474,7 @@
       </attribute>
       <attribute>
         <code>SQL_CONNECT</code>
-        <attribute>SET foreign_key_checks = 0;</attribute>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
@@ -496,13 +496,13 @@
   </connection>
   <connection>
     <name>cr_source</name>
-    <server>db01.dev.chromeriver.com</server>
+    <server>${CR_PROD_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>chrome_expense</database>
-    <port>3306</port>
-    <username>chrome_dev</username>
-    <password>Encrypted 2be98afc86aa79a8bbe0aab408a80bbc3</password>
+    <database>${CR_PROD_DB_NAME}</database>
+    <port>${CR_PROD_DB_PORT}</port>
+    <username>${CR_PROD_DB_USER}</username>
+    <password>${CR_PROD_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -521,7 +521,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3306</attribute>
+        <attribute>${CR_PROD_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -598,8 +598,8 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cr_dest</connection>
-    <schema>${CHROMERIVER_DB_NAME_DESTINATION}</schema>
+    <connection>cr_cust_fk_check_off</connection>
+    <schema>${CR_CUST_DB_NAME}</schema>
     <table>tbl_ExpenseReportLineItem</table>
     <commit>1000</commit>
     <truncate>N</truncate>

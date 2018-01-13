@@ -318,7 +318,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ExpenseReportLineItem.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/ExpenseReportLineItem.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -359,7 +359,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/LineItemUserDefinedData.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/LineItemUserDefinedData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -400,7 +400,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ExpenseReportHeader.ktr</filename>
+      <filename>${Internal.Job.Repository.Directory}/ExpenseReportHeader.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -441,7 +441,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ExpenseTransaction.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/ExpenseTransaction.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -482,7 +482,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/Matter.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/Matter.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -523,7 +523,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ExpenseReportLineItemStep.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/ExpenseReportLineItemStep.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -564,7 +564,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/IndependentTables.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/IndependentTables.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -605,7 +605,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ExpenseReportLineItem_Matter.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/ExpenseReportLineItem_Matter.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -646,7 +646,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PaidExpense.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PaidExpense.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -687,7 +687,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/InvoiceHeader.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/InvoiceHeader.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -728,7 +728,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/InvoiceHeaderStep.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/InvoiceHeaderStep.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -769,7 +769,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/HeaderNote.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/HeaderNote.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -810,7 +810,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/PaidInvoice.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PaidInvoice.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

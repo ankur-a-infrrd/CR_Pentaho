@@ -4,6 +4,7 @@
   <description />
   <extended_description />
   <job_version />
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2017/12/29 12:09:18.073</created_date>
@@ -12,14 +13,14 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -38,7 +39,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -50,7 +51,7 @@
       </attribute>
       <attribute>
         <code>SQL_CONNECT</code>
-        <attribute>SET foreign_key_checks = 0;</attribute>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
@@ -371,7 +372,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>D:\CR_Pentaho\DataExtract\FinancialEntityCustomerConfig\BatchProcessUserData.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}\BatchProcessUserData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -412,7 +413,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/FinancialEntity.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/FinancialEntity.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -453,7 +454,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/FinancialEntityCustomerConfig.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/FinancialEntityCustomerConfig.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -498,7 +499,7 @@ commit;</sql>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename />
       <sendOneStatement>F</sendOneStatement>
-      <connection>cr_dest</connection>
+      <connection>cr_cust_fk_check_off</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
