@@ -313,7 +313,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/DeleteDirectPayExportFile.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/DeleteDirectPayExportFile.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -349,7 +349,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/Delete-DirectPayExportFile.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/Delete-DirectPayExportFile.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>Y</params_from_previous>
