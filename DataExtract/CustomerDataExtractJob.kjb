@@ -11,7 +11,71 @@
   <modified_user>-</modified_user>
   <modified_date>2017/12/25 05:55:18.611</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>CUSTOMERID</name>
+      <default_value>11</default_value>
+      <description />
+    </parameter>
+  </parameters>
+  <connection>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -304,7 +368,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
+      <xloc>48</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -340,7 +404,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>396</xloc>
+      <xloc>768</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -376,7 +440,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
+      <xloc>928</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -412,7 +476,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>680</xloc>
+      <xloc>1056</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -448,8 +512,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1296</xloc>
-      <yloc>96</yloc>
+      <xloc>976</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>PopulateCRTables</name>
@@ -494,8 +558,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1456</xloc>
-      <yloc>96</yloc>
+      <xloc>784</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>Initial Table Load</name>
@@ -535,7 +599,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>240</xloc>
+      <xloc>624</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -573,7 +637,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>822</xloc>
+      <xloc>1200</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -611,7 +675,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1456</xloc>
+      <xloc>592</xloc>
       <yloc>240</yloc>
     </entry>
     <entry>
@@ -649,8 +713,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>96</yloc>
+      <xloc>1200</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>ktr - TablesWithoutCustomerID</name>
@@ -690,7 +754,62 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1168</xloc>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>DropAndCreateCustSchema</name>
+      <description />
+      <type>SQL</type>
+      <sql>DROP DATABASE `chrome_expense_cust`;
+Commit;
+
+CREATE DATABASE `chrome_expense_cust`;
+Commit;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_off</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>Execute_customer_DDLs</name>
+      <description />
+      <type>SQL</type>
+      <sql />
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Job.Filename.Directory}\cust_DDL_withCascadeUpdate.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_off</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>416</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>Write To Log</name>
+      <description />
+      <type>WRITE_TO_LOG</type>
+      <logmessage>**************************
+**************************
+
+DATA EXTRACT JOB COMPLETED
+
+**************************
+**************************</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>DATA EXTRACT JOB</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
       <yloc>240</yloc>
     </entry>
   </entries>
@@ -705,22 +824,13 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Initial Table Load</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Initial Table Load</from>
       <to>ktr - PrepareRefData1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>PrepareRefData3</from>
@@ -779,6 +889,33 @@
     <hop>
       <from>ExpenseReportDataExtractJob</from>
       <to>ktr - TablesWithoutCustomerID</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>DropAndCreateCustSchema</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>DropAndCreateCustSchema</from>
+      <to>Execute_customer_DDLs</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Execute_customer_DDLs</from>
+      <to>Initial Table Load</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

@@ -11,12 +11,66 @@
   <modified_user>-</modified_user>
   <modified_date>2018/01/12 13:59:10.938</modified_date>
   <parameters>
-    <parameter>
-      <name>CUSTOMERID</name>
-      <default_value>11</default_value>
-      <description />
-    </parameter>
-  </parameters>
+    </parameters>
+  <connection>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -394,6 +448,22 @@
       <xloc>624</xloc>
       <yloc>96</yloc>
     </entry>
+    <entry>
+      <name>Drop tbl_BusinessRulesImplBackup</name>
+      <description />
+      <type>SQL</type>
+      <sql>DROP TABLE tbl_BusinessRulesImplBackup;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_off</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>848</xloc>
+      <yloc>96</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -408,6 +478,15 @@
     <hop>
       <from>CreateBusinessRuleImplBackup</from>
       <to>UpdateBusinessRulesImpl</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>UpdateBusinessRulesImpl</from>
+      <to>Drop tbl_BusinessRulesImplBackup</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
