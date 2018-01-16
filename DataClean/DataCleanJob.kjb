@@ -655,6 +655,23 @@
       <xloc>1360</xloc>
       <yloc>80</yloc>
     </entry>
+    <entry>
+      <name>Write To Log</name>
+      <description />
+      <type>WRITE_TO_LOG</type>
+      <logmessage>************************
+************************
+DATA CLEAN JOB COMPLETED
+************************
+************************</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>Data Clean Job</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>832</xloc>
+      <yloc>288</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -732,6 +749,15 @@
     <hop>
       <from>Del_StateLanguage</from>
       <to>GetSchemaTablesWithCustomerID</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>CleanCustomerData</from>
+      <to>Write To Log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

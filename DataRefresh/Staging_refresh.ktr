@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DeleteCCTransactionDetail</name>
+    <name>Staging_refresh</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,23 +427,23 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/01/04 14:34:02.192</created_date>
+    <created_date>2018/01/15 16:59:46.889</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/01/04 14:34:02.192</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2018/01/15 16:59:46.889</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -463,7 +462,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -475,7 +474,7 @@
       </attribute>
       <attribute>
         <code>SQL_CONNECT</code>
-        <attribute>SET foreign_key_checks = 0;</attribute>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
@@ -497,19 +496,14 @@
   </connection>
   <order>
     <hop>
-      <from>TI - tbl_creditcardtransactiondetail</from>
-      <to>Select value CreditCardTransactionDetailID</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select value CreditCardTransactionDetailID</from>
-      <to>Copy rows to result</to>
+      <from>Staging_refresh</from>
+      <to>Completed Staging Refresh Job</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Copy rows to result</name>
-    <type>RowsToResult</type>
+    <name>Completed Staging Refresh Job</name>
+    <type>WriteToLog</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -518,37 +512,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select value CreditCardTransactionDetailID</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>********************************
+Completed STAGING Refresh Job
+********************************</logmessage>
     <fields>
-      <field>
-        <name>CreditCardTransactionDetailID</name>
-        <rename>ccTransactionId</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+      </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -557,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>176</yloc>
+      <xloc>473</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>TI - tbl_creditcardtransactiondetail</name>
-    <type>TableInput</type>
+    <name>Staging_refresh</name>
+    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -573,13 +545,99 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cr_dest</connection>
-    <sql>SELECT cctd.* from tbl_CreditCardTransactionDetail cctd JOIN tbl_ExpenseTransaction et on cctd.ExpenseTransactionID = et.ExpenseTransactionID where et.CustomerID = ${CUSTOMERID};</sql>
-    <limit>0</limit>
-    <lookup />
+    <connection>cr_cust_fk_check_off</connection>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DELETE FROM tbl_DataLock_ExpenseReportHeader;
+DELETE FROM tbl_DataLock_PAHeader;
+
+-- START TO DO  Staging Specific --
+UPDATE tbl_Person SET EmailAddress = concat(replace(UserName, '@', '.'), CustomerID, '-', CEIL(RAND()*10000), '@chromewallet.com');
+DELETE f.* FROM tbl_Feedback f;
+
+
+
+
+
+
+
+-- END TO DO  Staging Specific --
+
+
+
+UPDATE tbl_ReportScheduled rs 
+	SET rs.Status = 'CP', rs.ActualFireTime = now(), BatchPID='migrate-from-prod' 
+	WHERE rs.ActualFireTime IS NULL OR rs.Status='TG';
+
+UPDATE tbl_ReportRun rr 
+	SET rr.StartTime = now(), rr.FinishTime = now() 
+	WHERE rr.StartTime IS NULL OR rr.FinishTime IS NULL;
+
+UPDATE tbl_ReportDefinitionInstance rdi SET rdi.Schedule='NONE' WHERE rdi.Schedule like ('%TIME%');
+
+
+-- START TO DO  Staging Specific --
+UPDATE tbl_ReportDefinitionStep rds SET Value = 'other|smtp.chromefile.com|25|expense-noreply-staging@chromefile.com|workbugzilla' WHERE rds.Type = 'smtp_info';
+UPDATE tbl_NotificationEmail SET EmailAddress = 'NoSpecialCharAddress' WHERE EmailAddress LIKE '%\'%';
+
+
+
+
+
+
+
+-- END TO DO  Staging Specific --
+
+
+
+UPDATE tbl_ReportDefinitionStep rds 
+	SET rds.Value = concat('reportdef_',rds.ReportDefinitionID, '_safetynet@chromewallet.com') 
+	WHERE rds.Type = 'safety_net';
+
+UPDATE tbl_DataVersions SET LastUpdateDate = now();
+
+UPDATE tbl_ExpenseReportHeader erh SET erh.StatusReceiptsPdf='NONE', erh.StatusReceiptsJpg='NONE', erh.NumReceiptImages = 0;
+
+UPDATE tbl_InvoiceHeader ih SET ih.StatusReceiptsPdf='NONE', ih.StatusReceiptsJpg='NONE', ih.NumReceiptImages = 0;
+
+UPDATE tbl_ExpenseTransaction SET HasImage = 0, NumImages = 0, HasReceipt = 0, HasButlerImage = 0;
+	
+UPDATE tbl_PoReqHeader SET NumReceiptImages =0, NumImagesButler= 0;
+	
+TRUNCATE TABLE tbl_PersonAlternateEmailAddress;
+
+UPDATE tbl_ExpenseReportHeader erh 
+	LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportHeaderID) 
+	SET erh.StatusID = 4 
+	WHERE erli.ExpenseReportHeaderID IS NULL AND erh.StatusID IN (3, 5);
+
+
+
+
+-- START DONE Staging Specific --
+
+UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
+UPDATE tbl_PAHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
+UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) &lt;&gt; '';
+UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5));
+UPDATE tbl_AuditExport SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5)) where ReportID like '010%';
+UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('STAG',SUBSTR(InvoiceID, 5));
+
+-- END DONE Staging Specific --
+
+
+UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
+
+DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -588,8 +646,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>176</yloc>
+      <xloc>281</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

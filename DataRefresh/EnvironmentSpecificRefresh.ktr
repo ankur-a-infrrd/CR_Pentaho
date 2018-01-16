@@ -6,6 +6,7 @@
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -430,14 +431,14 @@
     <created_date>2018/01/15 10:10:25.359</created_date>
     <modified_user>-</modified_user>
     <modified_date>2018/01/15 10:10:25.359</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
     <notepad>
       <note>Data Refresh For QA</note>
-      <xloc>416</xloc>
-      <yloc>32</yloc>
+      <xloc>608</xloc>
+      <yloc>16</yloc>
       <width>145</width>
       <heigth>30</heigth>
       <fontname>Segoe UI</fontname>
@@ -457,8 +458,8 @@
     </notepad>
     <notepad>
       <note>Data Refresh For STAGING</note>
-      <xloc>464</xloc>
-      <yloc>336</yloc>
+      <xloc>608</xloc>
+      <yloc>304</yloc>
       <width>185</width>
       <heigth>30</heigth>
       <fontname>Segoe UI</fontname>
@@ -477,65 +478,6 @@
       <drawshadow>Y</drawshadow>
     </notepad>
   </notepads>
-  <connection>
-    <name>cr_cust_fk_check_off</name>
-    <server>${CR_CUST_DB_HOST}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>${CR_CUST_DB_NAME}</database>
-    <port>${CR_CUST_DB_PORT}</port>
-    <username>${CR_CUST_DB_USER}</username>
-    <password>${CR_CUST_DB_PASSWORD}</password>
-    <servername />
-    <data_tablespace />
-    <index_tablespace />
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${CR_CUST_DB_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SQL_CONNECT</code>
-        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
-      </attribute>
-      <attribute>
-        <code>STREAM_RESULTS</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <order>
     <hop>
       <from>Get Variables</from>
@@ -544,66 +486,15 @@
     </hop>
     <hop>
       <from>Switch / Case</from>
-      <to>QA_refresh</to>
+      <to>QA Refresh</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Switch / Case</from>
-      <to>Staging_refresh</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>QA_refresh</from>
-      <to>Completed QA Refresh Job</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Staging_refresh</from>
-      <to>Completed Staging Refresh Job</to>
+      <to>Staging Refresh</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Switch / Case</name>
-    <type>SwitchCase</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fieldname>environment</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>None</case_value_type>
-    <case_value_format />
-    <case_value_decimal />
-    <case_value_group />
-    <default_target_step>QA_refresh</default_target_step>
-    <cases>
-      <case>
-        <value>QA</value>
-        <target_step>QA_refresh</target_step>
-      </case>
-      <case>
-        <value>STAGING</value>
-        <target_step>Staging_refresh</target_step>
-      </case>
-    </cases>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
@@ -619,7 +510,7 @@
       <field>
         <name>environment</name>
         <variable>${ENVIRONMENT}</variable>
-        <type>None</type>
+        <type>String</type>
         <format />
         <currency />
         <decimal />
@@ -643,8 +534,8 @@
     </GUI>
   </step>
   <step>
-    <name>QA_refresh</name>
-    <type>ExecSQL</type>
+    <name>Switch / Case</name>
+    <type>SwitchCase</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -653,96 +544,23 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cr_cust_fk_check_off</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM tbl_DataLock_ExpenseReportHeader;
-
-DELETE FROM tbl_DataLock_PAHeader;
-
-UPDATE tbl_Person 
-SET EmailAddress = concat(replace(UserName, '@', '.'), CustomerID, '-', CEIL(RAND()*100000), '@chromewallet.com') 
-WHERE (CustomerID NOT IN (20) OR UserName = 'chromeriver') 
-	AND NOT (PersonID IN (1187300, 1186214, 1186237, 1314845, 1186111, 1186633, 1187251, 1187052, 1186194, 1186162, 1187495) AND CustomerID = 267) 
-	AND NOT (PersonID IN (1437062, 1455129, 1437061) AND CustomerID = 450) 
-	AND NOT (PersonID IN (791653, 791646, 791659, 801190, 800443, 800453, 897106, 800433, 800425, 800500) AND CustomerID = 308) 
-	AND NOT (PersonID IN (1250562, 1106196, 1168729, 1106194) AND CustomerID = 386) 
-	AND NOT (PersonID IN (744352, 744432) AND CustomerID = 286) 
-	AND NOT (PersonID IN (360265, 373001, 360426, 341933, 360008, 360065) AND CustomerID = 158) 
-	AND NOT (PersonID IN (194666,  774283, 334567, 763625, 185933, 1371353, 797022) AND CustomerID = 57) 
-	AND NOT (PersonID IN (222374, 223069, 922505) AND CustomerID = 84);
-
-
-UPDATE tbl_Person SET EmailAddress = concat('qa_', EmailAddress) WHERE CustomerID=20 AND UserName != 'chromeriver';
-
-
-UPDATE tbl_ReportScheduled rs 
-	SET rs.Status = 'CP', rs.ActualFireTime = now(), BatchPID='migrate-from-prod' 
-	WHERE rs.ActualFireTime IS NULL OR rs.Status='TG';
-
-UPDATE tbl_ReportRun rr 
-	SET rr.StartTime = now(), rr.FinishTime = now() 
-	WHERE rr.StartTime IS NULL OR rr.FinishTime IS NULL;
-
-UPDATE tbl_ReportDefinitionInstance rdi SET rdi.Schedule='NONE' WHERE rdi.Schedule like ('%TIME%')";
-
-
-UPDATE tbl_ReportDefinitionStep rds 
-	SET Value = 'other|smtp.chromefile.com|25|expense-noreply-qa@chromefile.com|workbugzilla' 
-	WHERE rds.Type = 'smtp_info';
-
-UPDATE tbl_AuditExportInvoice 
-	SET InvoiceID = CONCAT('QA',SUBSTR(InvoiceID,3)) 
-	WHERE InvoiceID like '010%'";
-
-
-
-
-UPDATE tbl_ReportDefinitionStep rds 
-	SET rds.Value = concat('reportdef_',rds.ReportDefinitionID, '_safetynet@chromewallet.com') 
-	WHERE rds.Type = 'safety_net';
-
-UPDATE tbl_DataVersions SET LastUpdateDate = now();
-
-UPDATE tbl_ExpenseReportHeader erh SET erh.StatusReceiptsPdf='NONE', erh.StatusReceiptsJpg='NONE', erh.NumReceiptImages = 0;
-
-UPDATE tbl_InvoiceHeader ih SET ih.StatusReceiptsPdf='NONE', ih.StatusReceiptsJpg='NONE', ih.NumReceiptImages = 0;
-
-UPDATE tbl_ExpenseTransaction SET HasImage = 0, NumImages = 0, HasReceipt = 0, HasButlerImage = 0;
-	
-UPDATE tbl_PoReqHeader SET NumReceiptImages =0, NumImagesButler= 0;
-	
-TRUNCATE TABLE tbl_PersonAlternateEmailAddress;
-
-UPDATE tbl_ExpenseReportHeader erh 
-	LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportHeaderID) 
-	SET erh.StatusID = 4 
-	WHERE erli.ExpenseReportHeaderID IS NULL AND erh.StatusID IN (3, 5);
-
-
-
-UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3));
-UPDATE tbl_PAHeader SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3));
-UPDATE tbl_AuditExport SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3)) WHERE ReportID like '010%';
-UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('QA',SUBSTR(InvoiceID, 3));
-UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) &lt;&gt; '';
-UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3));
-
-
-UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
-
-
-DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;
-</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-    </arguments>
+    <fieldname>environment</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format />
+    <case_value_decimal />
+    <case_value_group />
+    <default_target_step>QA_refresh</default_target_step>
+    <cases>
+      <case>
+        <value>QA</value>
+        <target_step>QA Refresh</target_step>
+      </case>
+      <case>
+        <value>STAGING</value>
+        <target_step>Staging Refresh</target_step>
+      </case>
+    </cases>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -751,14 +569,14 @@ DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransa
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>48</yloc>
+      <xloc>320</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Staging_refresh</name>
-    <type>ExecSQL</type>
+    <name>QA Refresh</name>
+    <type>TransExecutor</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -767,132 +585,36 @@ DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransa
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cr_cust_fk_check_off</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM tbl_DataLock_ExpenseReportHeader;
-DELETE FROM tbl_DataLock_PAHeader;
-
--- START TO DO  Staging Specific --
-UPDATE tbl_Person SET EmailAddress = concat(replace(UserName, '@', '.'), CustomerID, '-', CEIL(RAND()*10000), '@chromewallet.com');
-DELETE f.* FROM tbl_Feedback f;
-
-
-
-
-
-
-
--- END TO DO  Staging Specific --
-
-
-
-UPDATE tbl_ReportScheduled rs 
-	SET rs.Status = 'CP', rs.ActualFireTime = now(), BatchPID='migrate-from-prod' 
-	WHERE rs.ActualFireTime IS NULL OR rs.Status='TG';
-
-UPDATE tbl_ReportRun rr 
-	SET rr.StartTime = now(), rr.FinishTime = now() 
-	WHERE rr.StartTime IS NULL OR rr.FinishTime IS NULL;
-
-UPDATE tbl_ReportDefinitionInstance rdi SET rdi.Schedule='NONE' WHERE rdi.Schedule like ('%TIME%')";
-
-
--- START TO DO  Staging Specific --
-UPDATE tbl_ReportDefinitionStep rds SET Value = 'other|smtp.chromefile.com|25|expense-noreply-staging@chromefile.com|workbugzilla' WHERE rds.Type = 'smtp_info';
-UPDATE tbl_NotificationEmail SET EmailAddress = 'NoSpecialCharAddress' WHERE EmailAddress LIKE '%\'%';
-
-
-
-
-
-
-
--- END TO DO  Staging Specific --
-
-
-
-UPDATE tbl_ReportDefinitionStep rds 
-	SET rds.Value = concat('reportdef_',rds.ReportDefinitionID, '_safetynet@chromewallet.com') 
-	WHERE rds.Type = 'safety_net';
-
-UPDATE tbl_DataVersions SET LastUpdateDate = now();
-
-UPDATE tbl_ExpenseReportHeader erh SET erh.StatusReceiptsPdf='NONE', erh.StatusReceiptsJpg='NONE', erh.NumReceiptImages = 0;
-
-UPDATE tbl_InvoiceHeader ih SET ih.StatusReceiptsPdf='NONE', ih.StatusReceiptsJpg='NONE', ih.NumReceiptImages = 0;
-
-UPDATE tbl_ExpenseTransaction SET HasImage = 0, NumImages = 0, HasReceipt = 0, HasButlerImage = 0;
-	
-UPDATE tbl_PoReqHeader SET NumReceiptImages =0, NumImagesButler= 0;
-	
-TRUNCATE TABLE tbl_PersonAlternateEmailAddress;
-
-UPDATE tbl_ExpenseReportHeader erh 
-	LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportHeaderID) 
-	SET erh.StatusID = 4 
-	WHERE erli.ExpenseReportHeaderID IS NULL AND erh.StatusID IN (3, 5);
-
-
-
-
--- START DONE Staging Specific --
-
-UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
-UPDATE tbl_PAHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
-UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) &lt;&gt; '';
-UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5));
-UPDATE tbl_AuditExport SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5)) where ReportID like '010%';
-UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('STAG',SUBSTR(InvoiceID, 5));
-
--- END DONE Staging Specific --
-
-
-UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
-
-DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-    </arguments>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Completed QA Refresh Job</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>***************************
-Completed QA Refresh Job
-***************************</logmessage>
-    <fields>
-      </fields>
+    <specification_method>filename</specification_method>
+    <trans_object_id />
+    <trans_name />
+    <filename>${Internal.Job.Filename.Directory}/QA_refresh.ktr</filename>
+    <directory_path />
+    <group_size>1</group_size>
+    <group_field />
+    <group_time />
+    <parameters>
+      <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    <execution_result_target_step />
+    <execution_time_field>ExecutionTime</execution_time_field>
+    <execution_result_field>ExecutionResult</execution_result_field>
+    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
+    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
+    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
+    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
+    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
+    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
+    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
+    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
+    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
+    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
+    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
+    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
+    <result_rows_target_step />
+    <result_files_target_step />
+    <result_files_file_name_field>FileName</result_files_file_name_field>
+    <executors_output_step />
     <cluster_schema />
     <remotesteps>
       <input>
@@ -907,8 +629,8 @@ Completed QA Refresh Job
     </GUI>
   </step>
   <step>
-    <name>Completed Staging Refresh Job</name>
-    <type>WriteToLog</type>
+    <name>Staging Refresh</name>
+    <type>TransExecutor</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -917,15 +639,36 @@ Completed QA Refresh Job
       <method>none</method>
       <schema_name />
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>********************************
-Completed STAGING Refresh Job
-********************************</logmessage>
-    <fields>
-      </fields>
+    <specification_method>filename</specification_method>
+    <trans_object_id />
+    <trans_name />
+    <filename>${Internal.Job.Filename.Directory}/Staging_refresh.ktr</filename>
+    <directory_path />
+    <group_size>1</group_size>
+    <group_field />
+    <group_time />
+    <parameters>
+      <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    <execution_result_target_step />
+    <execution_time_field>ExecutionTime</execution_time_field>
+    <execution_result_field>ExecutionResult</execution_result_field>
+    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
+    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
+    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
+    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
+    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
+    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
+    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
+    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
+    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
+    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
+    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
+    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
+    <result_rows_target_step />
+    <result_files_target_step />
+    <result_files_file_name_field>FileName</result_files_file_name_field>
+    <executors_output_step />
     <cluster_schema />
     <remotesteps>
       <input>
@@ -935,7 +678,7 @@ Completed STAGING Refresh Job
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>256</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

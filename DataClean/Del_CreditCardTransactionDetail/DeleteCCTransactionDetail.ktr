@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <server>${CR_QA_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CHROMERIVER_DB_NAME_DESTINATION}</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>${CR_QA_DB_NAME}</database>
+    <port>${CR_QA_DB_PORT}</port>
+    <username>${CR_QA_DB_USER}</username>
+    <password>${CR_QA_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -463,7 +463,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>${CR_QA_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>

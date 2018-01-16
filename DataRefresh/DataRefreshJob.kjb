@@ -460,6 +460,23 @@
       <xloc>576</xloc>
       <yloc>96</yloc>
     </entry>
+    <entry>
+      <name>Write To Log</name>
+      <description />
+      <type>WRITE_TO_LOG</type>
+      <logmessage>***************************
+***************************
+DATA REFRESH JOB COMPLETED
+***************************
+***************************</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>Data Refresh Job Completed</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>96</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -492,6 +509,15 @@
     <hop>
       <from>RestoreAdminEmails</from>
       <to>UpdateBusinessRuleImplJob</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>UpdateAutoIncrementKeys</from>
+      <to>Write To Log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

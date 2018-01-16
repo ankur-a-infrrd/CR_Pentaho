@@ -13,7 +13,7 @@
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
-      <default_value>11</default_value>
+      <default_value>5</default_value>
       <description />
     </parameter>
   </parameters>
@@ -799,9 +799,7 @@ Commit;</sql>
       <type>WRITE_TO_LOG</type>
       <logmessage>**************************
 **************************
-
 DATA EXTRACT JOB COMPLETED
-
 **************************
 **************************</logmessage>
       <loglevel>Basic</loglevel>
