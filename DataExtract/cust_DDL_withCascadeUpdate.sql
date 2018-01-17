@@ -740,7 +740,7 @@ CREATE TABLE `tbl_BudgetDetail` (
   `DocType` enum('PA','ER') NOT NULL,
   `DocLineItemID` char(36) NOT NULL,
   `BudgetID` varchar(255) NOT NULL,
-  `AmountEncumbered` decimal(11,2) NOT NULL,
+  `Amount` decimal(11,2) NOT NULL,
   `Encumbered` tinyint(1) DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -4797,11 +4797,15 @@ CREATE TABLE `tbl_Feed` (
   `IsActive` tinyint(1) DEFAULT '1',
   `MergedColor` varchar(8) NOT NULL DEFAULT '0',
   `UpdateFolioParent` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Flag to allow update to parent expense transaction for Traxo MEMO',
+  `IntegrationID` int(11) DEFAULT NULL,
   PRIMARY KEY (`FeedID`),
   KEY `FK_tbl_Feed_1` (`CustomerID`),
-  CONSTRAINT `tbl_Feed_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`)
+  KEY `FK_tbl_Feed_2` (`IntegrationID`),
+  CONSTRAINT `tbl_Feed_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
+  CONSTRAINT `tbl_Feed_ibfk_2` FOREIGN KEY (`IntegrationID`) REFERENCES `tbl_Integration` (`IntegrationID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6746 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Table structure for table `tbl_FeedConfigs`
@@ -9620,7 +9624,7 @@ CREATE TABLE `tbl_Person_Entity` (
 DROP TABLE IF EXISTS `tbl_Person_Entity_v2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_Person_Entity_v2` (
+CREATE TABLE `tbl_person_entity_v2` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `PersonID` int(11) NOT NULL,
   `CustomerID` int(11) NOT NULL,
@@ -9644,6 +9648,7 @@ CREATE TABLE `tbl_Person_Entity_v2` (
   `FromDate` datetime NOT NULL,
   `ToDate` datetime DEFAULT NULL,
   `DateReplaced` datetime DEFAULT NULL,
+  `Source` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `EntityID` (`EntityID`),
   KEY `EntityName` (`EntityName`),

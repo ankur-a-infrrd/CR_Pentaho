@@ -11,7 +11,12 @@
   <modified_user>-</modified_user>
   <modified_date>2017/12/25 05:55:18.611</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>CUSTOMERID</name>
+      <default_value />
+      <description />
+    </parameter>
+  </parameters>
   <connection>
     <name>cr_cust_fk_check_off</name>
     <server>${CR_CUST_DB_HOST}</server>

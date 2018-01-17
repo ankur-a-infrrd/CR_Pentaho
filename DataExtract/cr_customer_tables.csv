@@ -281,8 +281,6 @@ tbl_StagedTransaction
 tbl_StagedTransactionError
 tbl_StatementUnmatchedTransaction
 tbl_StuckReport
-tbl_SymmetricKey
-tbl_BatchProcess
 tbl_TableAccess
 tbl_TaxCode
 tbl_TaxCodeDescription

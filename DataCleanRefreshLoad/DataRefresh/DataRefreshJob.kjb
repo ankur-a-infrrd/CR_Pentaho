@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>DataCleanJob</name>
+  <name>DataRefreshJob</name>
   <description />
   <extended_description />
   <job_version />
   <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/01/04 08:58:02.466</created_date>
+  <created_date>2018/01/15 10:09:34.938</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2018/01/04 08:58:02.466</modified_date>
+  <modified_date>2018/01/15 10:09:34.938</modified_date>
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
-      <default_value />
+      <default_value>154</default_value>
+      <description />
+    </parameter>
+    <parameter>
+      <name>ENVIRONMENT</name>
+      <default_value>QA</default_value>
       <description />
     </parameter>
   </parameters>
@@ -293,88 +298,6 @@
   <shared_objects_file />
   <entries>
     <entry>
-      <name>CleanCustomerData</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/CleanCustomerData.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>Y</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value>${CUSTOMERID}</value>
-        </parameter>
-        <parameter>
-          <name>table_name</name>
-          <stream_name>table_name</stream_name>
-          <value />
-        </parameter>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1056</xloc>
-      <yloc>288</yloc>
-    </entry>
-    <entry>
-      <name>GetSchemaTablesWithCustomerID</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/GetAllCustomerTables.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1360</xloc>
-      <yloc>288</yloc>
-    </entry>
-    <entry>
       <name>START</name>
       <description />
       <type>SPECIAL</type>
@@ -391,16 +314,57 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
-      <yloc>80</yloc>
+      <xloc>192</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
-      <name>Del_CreditCardTransactionDetail</name>
+      <name>EnvironmentSpecificRefresh</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/EnvironmentSpecificRefresh.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>ENVIRONMENT</name>
+          <stream_name />
+          <value>${ENVIRONMENT}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>UpdateBusinessRuleImplJob</name>
       <description />
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_CreditCardTransactionDetail\Delete_CreditCardTransactionDetail.kjb</filename>
+      <filename>${Internal.Job.Filename.Directory}\UpdateBusinessRuleImpl\UpdateBusinessRuleImpl.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -429,16 +393,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>80</yloc>
+      <xloc>784</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
-      <name>Del_DirectPayExportFile</name>
+      <name>UpdateAutoIncrementKeys</name>
       <description />
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_DirectPayExportFile\Delete_DirectPayExportFile.kjb</filename>
+      <filename>${Internal.Job.Filename.Directory}\UpdateKeys\UpdateAutoIncrementKeysJob.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -455,6 +419,43 @@
       <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
       <pass_export>N</pass_export>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1008</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>RestoreAdminEmails</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/restoreAdminEmails.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
@@ -463,234 +464,34 @@
           <value>${CUSTOMERID}</value>
         </parameter>
       </parameters>
-      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
-      <yloc>80</yloc>
-    </entry>
-    <entry>
-      <name>Del_ExpenseExportData</name>
-      <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_ExpenseExportData\Delete_ExpenseExportData.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value> ${CUSTOMERID}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>80</yloc>
-    </entry>
-    <entry>
-      <name>Del_FeedGroup</name>
-      <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_FeedGroup\Delete_FeedGroup.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value>${CUSTOMERID}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>80</yloc>
-    </entry>
-    <entry>
-      <name>Del_PreLoad_Staged_Reference</name>
-      <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_PreLoad_Staged_Reference\Delete_PreLoad_Staged_Reference.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value>${CUSTOMERID}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>80</yloc>
-    </entry>
-    <entry>
-      <name>Del_TCAGroupMapping</name>
-      <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_TCAGroupMapping\Delete_TCAGroupMapping.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value>${CUSTOMERID}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1168</xloc>
-      <yloc>80</yloc>
-    </entry>
-    <entry>
-      <name>Del_StateLanguage</name>
-      <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\Del_StateLanguage\StateLanguage.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>CUSTOMERID</name>
-          <stream_name />
-          <value>${CUSTOMERID}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1360</xloc>
-      <yloc>80</yloc>
+      <xloc>576</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>Write To Log</name>
       <description />
       <type>WRITE_TO_LOG</type>
-      <logmessage>************************
-************************
-DATA CLEAN JOB COMPLETED
-************************
-************************</logmessage>
+      <logmessage>***************************
+***************************
+DATA REFRESH JOB COMPLETED
+***************************
+***************************</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>Data Clean Job</logsubject>
+      <logsubject>Data Refresh Job Completed</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>288</yloc>
+      <xloc>1248</xloc>
+      <yloc>96</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>GetSchemaTablesWithCustomerID</from>
-      <to>CleanCustomerData</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
-      <to>Del_CreditCardTransactionDetail</to>
+      <to>EnvironmentSpecificRefresh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -698,8 +499,8 @@ DATA CLEAN JOB COMPLETED
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Del_CreditCardTransactionDetail</from>
-      <to>Del_DirectPayExportFile</to>
+      <from>UpdateBusinessRuleImplJob</from>
+      <to>UpdateAutoIncrementKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -707,8 +508,8 @@ DATA CLEAN JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Del_DirectPayExportFile</from>
-      <to>Del_ExpenseExportData</to>
+      <from>EnvironmentSpecificRefresh</from>
+      <to>RestoreAdminEmails</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -716,8 +517,8 @@ DATA CLEAN JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Del_ExpenseExportData</from>
-      <to>Del_FeedGroup</to>
+      <from>RestoreAdminEmails</from>
+      <to>UpdateBusinessRuleImplJob</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -725,43 +526,7 @@ DATA CLEAN JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Del_FeedGroup</from>
-      <to>Del_PreLoad_Staged_Reference</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Del_PreLoad_Staged_Reference</from>
-      <to>Del_TCAGroupMapping</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Del_TCAGroupMapping</from>
-      <to>Del_StateLanguage</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Del_StateLanguage</from>
-      <to>GetSchemaTablesWithCustomerID</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>CleanCustomerData</from>
+      <from>UpdateAutoIncrementKeys</from>
       <to>Write To Log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
