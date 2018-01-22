@@ -1,22 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>UpdateLastInsertedKeyJob</name>
+  <name>UpdatePersonKeys</name>
   <description />
   <extended_description />
   <job_version />
-  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/01/18 10:01:56.171</created_date>
+  <created_date>2018/01/22 14:07:20.391</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2018/01/18 10:01:56.171</modified_date>
+  <modified_date>2018/01/22 14:07:20.391</modified_date>
   <parameters>
-    <parameter>
-      <name>table_name</name>
-      <default_value />
-      <description />
-    </parameter>
-  </parameters>
+    </parameters>
+  <connection>
+    <name>cr_cust_fk_check_on</name>
+    <server>${CR_CUST_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET FOREIGN_KEY_CHECKS = 1;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -313,12 +366,12 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>GetVars</name>
+      <name>PersonKeys</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/GetVars.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PersonKeys.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -341,29 +394,24 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>table_name</name>
-          <stream_name />
-          <value>${table_name}</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>368</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>UpdatePrimaryKeys</name>
+      <name>PersonUpdate</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/UpdatePrimaryKeys.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/PersonUpdate.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>Y</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
@@ -382,99 +430,63 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>COLUMN_NAME</name>
-          <stream_name>COLUMN_NAME</stream_name>
-          <value />
-        </parameter>
-        <parameter>
-          <name>auto_increment</name>
-          <stream_name>auto_increment</stream_name>
-          <value />
-        </parameter>
-        <parameter>
-          <name>row_count</name>
-          <stream_name>row_count</stream_name>
-          <value />
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>720</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>UpdateExpenseTransactionKeys</name>
+      <name>Drop FK constraint</name>
       <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}/UpdateExpenseTransactionKeys\UpdateExpenseTransactionKeys.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
+      <type>SQL</type>
+      <sql>ALTER TABLE tbl_Person DROP FOREIGN KEY FK_Person_6;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_on</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>544</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>UpdatePersonKeys</name>
+      <name>Add FK Constraint</name>
       <description />
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\UpdateLastInsertedKey\UpdatePersonKeys\UpdatePersonKeys.kjb</filename>
-      <jobname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name />
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
+      <type>SQL</type>
+      <sql>ALTER TABLE tbl_Person ADD CONSTRAINT `FK_Person_6` FOREIGN KEY (`ReportsToPersonID`) REFERENCES `tbl_Person` (`PersonID`);</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_cust_fk_check_on</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1032</xloc>
+      <xloc>912</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>Write To Log</name>
+      <description />
+      <type>WRITE_TO_LOG</type>
+      <logmessage>tbl_Person Keys Updated Successfully.</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>Update Keys Successfull.</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1072</xloc>
       <yloc>96</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>GetVars</to>
+      <to>PersonKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -482,8 +494,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>GetVars</from>
-      <to>UpdatePrimaryKeys</to>
+      <from>PersonKeys</from>
+      <to>Drop FK constraint</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -491,8 +503,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UpdatePrimaryKeys</from>
-      <to>UpdateExpenseTransactionKeys</to>
+      <from>Drop FK constraint</from>
+      <to>PersonUpdate</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -500,8 +512,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UpdateExpenseTransactionKeys</from>
-      <to>UpdatePersonKeys</to>
+      <from>PersonUpdate</from>
+      <to>Add FK Constraint</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Add FK Constraint</from>
+      <to>Write To Log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
