@@ -164,7 +164,6 @@ tbl_Item
 tbl_ItemPrice
 tbl_LineItemNote
 tbl_Location
-tbl_LocationCustomer
 tbl_LocationCustomerCity
 tbl_LoginAttemptHistory
 tbl_ManualRoute
@@ -188,7 +187,6 @@ tbl_MotdType
 tbl_NACHAInfo
 tbl_NetZeroResults
 tbl_NotificationEmail
-tbl_ObjectAttribute
 tbl_PAHeader
 tbl_PAHeader_Matter
 tbl_PAHeaderCompliance
@@ -288,7 +286,6 @@ tbl_TaxCodeDescription_PTA
 tbl_TaxCodeMapping
 tbl_TemporaryHealthCareProvider
 tbl_ThirdParty
-tbl_TransactionCorporateAccount
 tbl_TransactionCorporateAccountCurrency
 tbl_TransactionCorporateAccountGroup
 tbl_TransactionCorporateAccountGrouping

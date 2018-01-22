@@ -569,7 +569,7 @@
       <schema_name />
     </partitioning>
     <connection>cr_source</connection>
-    <sql>SELECT * FROM tbl_City WHERE CustomerID = ${CUSTOMERID};</sql>
+    <sql>SELECT * FROM tbl_City WHERE CustomerID in (${CUSTOMERID},0);</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>

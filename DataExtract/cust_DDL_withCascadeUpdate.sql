@@ -3750,7 +3750,7 @@ CREATE TABLE `tbl_ExpenseReportLineItemStep` (
   KEY `IDX_tbl_ExpenseReportLineItemStep_4` (`CustomerID`,`UpdateDate`,`StatusApproved`,`PersonID`),
   CONSTRAINT `FK_tbl_ExpenseReportLineItemStep_tbl_Person_CompletedBy` FOREIGN KEY (`CompletedByPersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE,
   CONSTRAINT `tbl_ExpenseReportLineItemStep_ibfk_1` FOREIGN KEY (`ExpenseReportLineItemID`) REFERENCES `tbl_ExpenseReportLineItem` (`ExpenseReportLineItemID`) ON UPDATE CASCADE,
-  CONSTRAINT `tbl_ExpenseReportLineItemStep_ibfk_2` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE,
+--  CONSTRAINT `tbl_ExpenseReportLineItemStep_ibfk_2` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE,
   CONSTRAINT `tbl_ExpenseReportLineItemStep_ibfk_3` FOREIGN KEY (`CustomerID`, `PersonID`) REFERENCES `tbl_Person` (`CustomerID`, `PersonID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5204,14 +5204,10 @@ CREATE TABLE `tbl_HeaderNote` (
   `Note` varchar(2000) DEFAULT NULL,
   `CreateDate` datetime NOT NULL,
   PRIMARY KEY (`HeaderNoteID`),
-  KEY `FK_tbl_HeaderNote_1` (`ExpenseReportHeaderID`),
   KEY `FK_tbl_HeaderNote_2` (`CustomerID`),
-  KEY `FK_tbl_HeaderNote_3` (`PersonID`),
   KEY `FK_tbl_HeaderNote_4` (`ExpenseReportHeaderID`,`CustomerID`),
   KEY `FK_tbl_HeaderNote_5` (`PersonID`,`CustomerID`),
-  CONSTRAINT `FK_tbl_HeaderNote_1` FOREIGN KEY (`ExpenseReportHeaderID`) REFERENCES `tbl_ExpenseReportHeader` (`ExpenseReportHeaderID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_HeaderNote_2` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_tbl_HeaderNote_3` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_HeaderNote_4` FOREIGN KEY (`ExpenseReportHeaderID`, `CustomerID`) REFERENCES `tbl_ExpenseReportHeader` (`ExpenseReportHeaderID`, `CustomerID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_HeaderNote_5` FOREIGN KEY (`PersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -7045,11 +7041,9 @@ CREATE TABLE `tbl_LineItemNote` (
   PRIMARY KEY (`LineItemNoteID`),
   KEY `FK_LineItemNote_1` (`ExpenseReportLineItemID`),
   KEY `FK_LineItemNote_2` (`CustomerID`),
-  KEY `FK_LineItemNote_3` (`PersonID`),
   KEY `FK_LineItemNote_4` (`PersonID`,`CustomerID`),
   CONSTRAINT `FK_LineItemNote_1` FOREIGN KEY (`ExpenseReportLineItemID`) REFERENCES `tbl_ExpenseReportLineItem` (`ExpenseReportLineItemID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_LineItemNote_2` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_LineItemNote_3` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_LineItemNote_4` FOREIGN KEY (`PersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -7735,7 +7729,6 @@ CREATE TABLE `tbl_MessageDescription` (
   PRIMARY KEY (`MessageID`,`CustomerID`,`LanguageID`),
   KEY `FK_tbl_MessageDescription_2` (`CustomerID`),
   KEY `FK_tbl_MessageDescription_3` (`LanguageID`),
-  CONSTRAINT `FK_tbl_MessageDescription_1` FOREIGN KEY (`MessageID`) REFERENCES `tbl_Message` (`MessageID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_MessageDescription_2` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
   CONSTRAINT `FK_tbl_MessageDescription_3` FOREIGN KEY (`LanguageID`) REFERENCES `tbl_Language` (`LanguageID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_MessageDescription_4` FOREIGN KEY (`MessageID`, `CustomerID`) REFERENCES `tbl_Message` (`MessageID`, `CustomerID`) ON UPDATE CASCADE
@@ -8141,12 +8134,10 @@ CREATE TABLE `tbl_PAHeaderNote` (
   PRIMARY KEY (`PAHeaderNoteID`),
   KEY `FK_PAHeaderNotes_1` (`PAHeaderID`),
   KEY `FK_PAHeaderNotes_2` (`CustomerID`),
-  KEY `FK_PAHeaderNotes_3` (`PersonID`),
   KEY `FK_PAHeaderNotes_4` (`PAHeaderID`,`CustomerID`),
   KEY `FK_PAHeaderNotes_5` (`PersonID`,`CustomerID`),
   CONSTRAINT `FK_PAHeaderNotes_1` FOREIGN KEY (`PAHeaderID`) REFERENCES `tbl_PAHeader` (`PAHeaderID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_PAHeaderNotes_2` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_PAHeaderNotes_3` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_PAHeaderNotes_4` FOREIGN KEY (`PAHeaderID`, `CustomerID`) REFERENCES `tbl_PAHeader` (`PAHeaderID`, `CustomerID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_PAHeaderNotes_5` FOREIGN KEY (`PersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

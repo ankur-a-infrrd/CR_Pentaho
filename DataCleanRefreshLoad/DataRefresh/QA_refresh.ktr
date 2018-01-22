@@ -430,7 +430,7 @@
     <created_date>2018/01/15 16:58:10.436</created_date>
     <modified_user>-</modified_user>
     <modified_date>2018/01/15 16:58:10.436</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -550,7 +550,15 @@ Completed QA Refresh Job
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM tbl_DataLock_ExpenseReportHeader;
+    <sql>UPDATE tbl_TransactionCorporateAccount SET TransactionCorporateAccountID = 0 WHERE CustomerID=0 AND AccountCode='NA' AND AccountName='NA';
+
+
+
+
+
+
+
+DELETE FROM tbl_DataLock_ExpenseReportHeader;
 
 DELETE FROM tbl_DataLock_PAHeader;
 
@@ -619,6 +627,29 @@ UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
 
 
 DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;
+
+
+
+
+
+
+
+
+
+UPDATE tbl_ExpensePreAuthorization SET ExpenseTransactionID = NULL WHERE ExpenseTransactionID NOT IN (SELECT ExpenseTransactionID FROM tbl_ExpenseTransaction);
+
+ 
+DELETE FROM tbl_ExpenseReportLineItem_Guest WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
+DELETE FROM tbl_ExpenseReportLineItemStep WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
+DELETE FROM tbl_ExpenseReportLineItemTrip WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
+
+UPDATE tbl_TravelTransaction tt LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET tt.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND tt.ExpenseTransactionID IS NOT NULL;
+
+
+--UPDATE tbl_ExpenseTransaction et LEFT JOIN tbl_TransactionCorporateAccount tca USING (TransactionCorporateAccountID) SET et.TransactionCorporateAccountID = NULL WHERE tca.TransactionCorporateAccountID IS NULL;
+
+
+
 </sql>
     <set_params>N</set_params>
     <insert_field />

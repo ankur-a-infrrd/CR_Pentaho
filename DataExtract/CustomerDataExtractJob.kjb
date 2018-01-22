@@ -603,7 +603,7 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>StateCityLanguage</name>
+      <name>StateCityLanguageLocation</name>
       <description />
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -637,7 +637,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
+      <xloc>1248</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -713,7 +713,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
+      <xloc>1248</xloc>
       <yloc>240</yloc>
     </entry>
     <entry>
@@ -754,7 +754,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>128</xloc>
       <yloc>240</yloc>
     </entry>
     <entry>
@@ -807,8 +807,8 @@ DATA EXTRACT JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>240</yloc>
+      <xloc>128</xloc>
+      <yloc>448</yloc>
     </entry>
   </entries>
   <hops>
@@ -832,7 +832,7 @@ DATA EXTRACT JOB COMPLETED
     </hop>
     <hop>
       <from>PrepareRefData3</from>
-      <to>StateCityLanguage</to>
+      <to>StateCityLanguageLocation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -849,7 +849,7 @@ DATA EXTRACT JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>StateCityLanguage</from>
+      <from>StateCityLanguageLocation</from>
       <to>kjb - FinancialEntityCustomerConfig</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -878,15 +878,6 @@ DATA EXTRACT JOB COMPLETED
     <hop>
       <from>kjb - FinancialEntityCustomerConfig</from>
       <to>GetCRTableNameFromCSV</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>ExpenseReportDataExtractJob</from>
-      <to>ktr - TablesWithoutCustomerID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -923,6 +914,15 @@ DATA EXTRACT JOB COMPLETED
     <hop>
       <from>ktr - TablesWithoutCustomerID</from>
       <to>Write To Log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ExpenseReportDataExtractJob</from>
+      <to>ktr - TablesWithoutCustomerID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
