@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>UpdateLastInsertedKeyJob</name>
+  <name>UpdateTablesCrossCluster</name>
   <description />
   <extended_description />
   <job_version />
-  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/01/18 10:01:56.171</created_date>
+  <created_date>2018/01/22 15:55:11.284</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2018/01/18 10:01:56.171</modified_date>
+  <modified_date>2018/01/22 15:55:11.284</modified_date>
   <parameters>
-    <parameter>
-      <name>table_name</name>
-      <default_value />
-      <description />
-    </parameter>
-  </parameters>
+    </parameters>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -309,16 +303,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
+      <xloc>160</xloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
-      <name>GetVars</name>
+      <name>UpdateTableCityKeys</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/GetVars.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableCityKeys.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -341,29 +335,24 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>table_name</name>
-          <stream_name />
-          <value>${table_name}</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>384</xloc>
-      <yloc>96</yloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
-      <name>UpdatePrimaryKeys</name>
+      <name>UpdateTableStateKeys</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/UpdatePrimaryKeys.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableStateKeys.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>Y</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
@@ -382,132 +371,198 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>COLUMN_NAME</name>
-          <stream_name>COLUMN_NAME</stream_name>
-          <value />
-        </parameter>
-        <parameter>
-          <name>auto_increment</name>
-          <stream_name>auto_increment</stream_name>
-          <value />
-        </parameter>
-        <parameter>
-          <name>row_count</name>
-          <stream_name>row_count</stream_name>
-          <value />
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>96</yloc>
+      <xloc>608</xloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
-      <name>UpdateExpenseTransactionKeys</name>
+      <name>UpdateTableMaskKeys</name>
       <description />
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}/UpdateExpenseTransactionKeys\UpdateExpenseTransactionKeys.kjb</filename>
-      <jobname />
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableMaskKeys.ktr</filename>
+      <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile />
       <logext />
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
-      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>96</yloc>
+      <xloc>808</xloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
-      <name>UpdatePersonKeys</name>
+      <name>UpdateTableObjectAttributeKeys</name>
       <description />
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>${Internal.Job.Filename.Directory}\UpdatePersonKeys\UpdatePersonKeys.kjb</filename>
-      <jobname />
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableObjectAttributeKeys.ktr</filename>
+      <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile />
       <logext />
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
-      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1032</xloc>
-      <yloc>96</yloc>
+      <xloc>1008</xloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
-      <name>UpdateTablesForCrossClusterRefresh</name>
+      <name>UpdateTableLocationCustomerKeys</name>
       <description />
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id />
-      <filename>D:\CR_Pentaho\DataCleanRefreshLoad\DataRefresh\UpdateKeys\UpdateLastInsertedKey\UpdateTablesCrossCluster\UpdateTablesCrossCluster.kjb</filename>
-      <jobname />
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableLocationCustomerKeys.ktr</filename>
+      <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile />
       <logext />
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
-      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1264</xloc>
-      <yloc>96</yloc>
+      <xloc>1280</xloc>
+      <yloc>112</yloc>
+    </entry>
+    <entry>
+      <name>UpdateTableTransactionCorporateAccountKeys</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/UpdateTableTransactionCorporateAccountKeys.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1280</xloc>
+      <yloc>336</yloc>
+    </entry>
+    <entry>
+      <name>DeleteCustomerZero</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Job.Filename.Directory}/DeleteCustomerZero.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1568</xloc>
+      <yloc>336</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>GetVars</to>
+      <to>UpdateTableCityKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -515,8 +570,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>GetVars</from>
-      <to>UpdatePrimaryKeys</to>
+      <from>UpdateTableCityKeys</from>
+      <to>UpdateTableStateKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -524,8 +579,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UpdatePrimaryKeys</from>
-      <to>UpdateExpenseTransactionKeys</to>
+      <from>UpdateTableStateKeys</from>
+      <to>UpdateTableMaskKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -533,8 +588,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UpdateExpenseTransactionKeys</from>
-      <to>UpdatePersonKeys</to>
+      <from>UpdateTableMaskKeys</from>
+      <to>UpdateTableObjectAttributeKeys</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -542,8 +597,26 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UpdatePersonKeys</from>
-      <to>UpdateTablesForCrossClusterRefresh</to>
+      <from>UpdateTableObjectAttributeKeys</from>
+      <to>UpdateTableLocationCustomerKeys</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>UpdateTableLocationCustomerKeys</from>
+      <to>UpdateTableTransactionCorporateAccountKeys</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>UpdateTableTransactionCorporateAccountKeys</from>
+      <to>DeleteCustomerZero</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

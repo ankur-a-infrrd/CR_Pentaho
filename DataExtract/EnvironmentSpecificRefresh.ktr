@@ -588,7 +588,7 @@
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>48</yloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -663,7 +663,7 @@
     <case_value_format />
     <case_value_decimal />
     <case_value_group />
-    <default_target_step>QA_refresh</default_target_step>
+    <default_target_step>QA Refresh</default_target_step>
     <cases>
       <case>
         <value>QA</value>

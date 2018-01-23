@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PersonKeys</name>
+    <name>UpdateTableCityKeys</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/01/22 14:16:07.337</created_date>
+    <created_date>2018/01/22 15:57:22.073</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/01/22 14:16:07.337</modified_date>
+    <modified_date>2018/01/22 15:57:22.073</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -614,23 +615,28 @@
   </connection>
   <order>
     <hop>
-      <from>Select values</from>
-      <to>Table Get Row Count</to>
+      <from>TI_tbl_City_Cust_DB</from>
+      <to>Merge Rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>Table input 2</to>
+      <from>TI_tbl_City_Dest_DB</from>
+      <to>Merge Rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table Get Last Updated Key Value</from>
+      <from>Merge Rows (diff)</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table Get Row Count</from>
-      <to>Select values 2</to>
+      <from>Select values</from>
+      <to>Replace identical with CityID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Replace identical with CityID</from>
+      <to>Delete identical rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -639,34 +645,49 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Select values 2</from>
+      <to>Get Row Count - tbl_City</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2 2</from>
+      <to>Table input 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Select values 4</from>
       <to>Modified Java Script Value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input 2</from>
+      <from>Table Get Last Updated Key Value</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get Row Count - tbl_City</from>
+      <to>Select values 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input 2 2</from>
       <to>Select values 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Set Variables</from>
-      <to>Table input</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input</from>
-      <to>Copy rows to result</to>
+      <from>Delete identical rows</from>
+      <to>Table Get Last Updated Key Value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Update Auto Increment Value</from>
-      <to>Set Variables</to>
+      <to>Update Auto Increment Value 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Copy rows to result</name>
-    <type>RowsToResult</type>
+    <name>Delete identical rows</name>
+    <type>Delete</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -675,6 +696,18 @@
       <method>none</method>
       <schema_name />
     </partitioning>
+    <connection>cr_cust_fk_check_off</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>${CR_CUST_DB_NAME}</schema>
+      <table>tbl_City</table>
+      <key>
+        <name>flagfield</name>
+        <field>CityID</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -683,8 +716,61 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>224</yloc>
+      <xloc>736</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge Rows (diff)</name>
+    <type>MergeRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <keys>
+      <key>CityID</key>
+      <key>CustomerID</key>
+      <key>StateID</key>
+      <key>Name</key>
+      <key>Status</key>
+      <key>Type</key>
+      <key>CreateDate</key>
+      <key>UpdateDate</key>
+      <key>County</key>
+      <key>IsMilitaryLocation</key>
+    </keys>
+    <values>
+      <value>CityID</value>
+      <value>CustomerID</value>
+      <value>StateID</value>
+      <value>Name</value>
+      <value>Status</value>
+      <value>Type</value>
+      <value>CreateDate</value>
+      <value>UpdateDate</value>
+      <value>County</value>
+      <value>IsMilitaryLocation</value>
+    </values>
+    <flag_field>flagfield</flag_field>
+    <reference>TI_tbl_City_Dest_DB</reference>
+    <compare>TI_tbl_City_Cust_DB</compare>
+    <compare>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -714,7 +800,7 @@ if(maxKey != null){
 		startUpdateKey = maxKey;
 	}
 }
-var updateKey = row_count + startUpdateKey + 10;
+var updateKey = row_count + startUpdateKey + 5;
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -744,13 +830,83 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1176</xloc>
-      <yloc>64</yloc>
+      <xloc>1408</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace identical with CityID</name>
+    <type>ReplaceString</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>flagfield</in_stream_name>
+        <out_stream_name />
+        <use_regex>no</use_regex>
+        <replace_string>identical</replace_string>
+        <replace_by_string />
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string>CityID</replace_field_by_string>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
     <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>CityID</name>
+      </field>
+      <field>
+        <name>flagfield</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -792,13 +948,13 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>356</xloc>
-      <yloc>64</yloc>
+      <xloc>1120</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
+    <name>Select values 2 2</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -811,9 +967,11 @@ var updateKey = row_count + startUpdateKey + 10;
     <fields>
       <field>
         <name>auto_increment</name>
+        <rename />
       </field>
       <field>
         <name>Count(*)</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -825,8 +983,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>684</xloc>
-      <yloc>64</yloc>
+      <xloc>1440</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -861,41 +1019,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1012</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set Variables</name>
-    <type>SetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>startUpdateKey</field_name>
-        <variable_name>STARTUPDATEKEY</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value />
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1392</xloc>
-      <yloc>224</yloc>
+      <xloc>1568</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -914,7 +1039,7 @@ var updateKey = row_count + startUpdateKey + 10;
     <sql>SELECT AUTO_INCREMENT
 FROM  INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA = '${CR_QA_DB_NAME}'
-AND   TABLE_NAME   = 'tbl_Person';</sql>
+AND   TABLE_NAME   = 'tbl_City';</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -928,13 +1053,13 @@ AND   TABLE_NAME   = 'tbl_Person';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>64</yloc>
+      <xloc>944</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table Get Row Count</name>
+    <name>Get Row Count - tbl_City</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -945,69 +1070,7 @@ AND   TABLE_NAME   = 'tbl_Person';</sql>
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_off</connection>
-    <sql>SELECT Count(*),? as auto_increment FROM tbl_Person;</sql>
-    <limit>0</limit>
-    <lookup>Select values</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>520</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_cust_fk_check_on</connection>
-    <sql>SELECT * FROM tbl_Person ORDER BY PersonID;</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input 2</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_cust_fk_check_off</connection>
-    <sql>SELECT Max(PersonID) as maxKey, ? as auto_increment,? as row_count FROM tbl_Person;</sql>
+    <sql>SELECT Count(*),? as auto_increment FROM tbl_City;</sql>
     <limit>0</limit>
     <lookup>Select values 2</lookup>
     <execute_each_row>N</execute_each_row>
@@ -1021,8 +1084,101 @@ AND   TABLE_NAME   = 'tbl_Person';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>1280</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI_tbl_City_Cust_DB</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_cust_fk_check_on</connection>
+    <sql>SELECT * FROM tbl_City;</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
       <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI_tbl_City_Dest_DB</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_dest</connection>
+    <sql>SELECT * FROM tbl_City;</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input 2 2</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_cust_fk_check_off</connection>
+    <sql>SELECT Max(CityID) as maxKey, ? as auto_increment,? as row_count FROM tbl_City;</sql>
+    <limit>0</limit>
+    <lookup>Select values 2 2</lookup>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1568</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1042,7 +1198,7 @@ AND   TABLE_NAME   = 'tbl_Person';</sql>
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>ALTER TABLE tbl_Person AUTO_INCREMENT = ?;</sql>
+    <sql>ALTER TABLE tbl_City AUTO_INCREMENT = ?;</sql>
     <set_params>N</set_params>
     <insert_field />
     <update_field />
@@ -1061,8 +1217,51 @@ AND   TABLE_NAME   = 'tbl_Person';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1392</xloc>
-      <yloc>64</yloc>
+      <xloc>1184</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update Auto Increment Value 2</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_cust_fk_check_on</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>SELECT @i:=?;
+UPDATE tbl_City AS d 
+SET CityID = @i:=@i+1 
+ORDER BY CityID ASC;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+      <argument>
+        <name>startUpdateKey</name>
+      </argument>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>944</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

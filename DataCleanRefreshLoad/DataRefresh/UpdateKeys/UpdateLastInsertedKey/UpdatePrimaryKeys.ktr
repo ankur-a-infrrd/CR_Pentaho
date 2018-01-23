@@ -927,13 +927,13 @@ ORDER BY ${COLUMN_NAME} ASC;</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
+    <loglevel>log_level_detailed</loglevel>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
     <logmessage>*******************************************
 *******************************************
-New auto Increment value ${auto_increment}
+New auto Increment value
 Max Key value
 *******************************************
 *******************************************</logmessage>
