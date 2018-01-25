@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>UpdateTableCityKeys</name>
+    <name>DeleteTableObjectAttributeKeys</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,14 +427,73 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/01/22 15:57:22.073</created_date>
+    <created_date>2018/01/25 10:06:23.662</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/01/22 15:57:22.073</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2018/01/25 10:06:23.662</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>cr_cust_fk_check_off</name>
+    <server>${CR_CUST_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <connection>
     <name>cr_cust_fk_check_on</name>
     <server>${CR_CUST_DB_HOST}</server>
@@ -556,49 +614,34 @@
   </connection>
   <order>
     <hop>
-      <from>Get Row Count - tbl_City</from>
-      <to>Select values 2 2</to>
+      <from>Merge Rows (diff)</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Modified Java Script Value</from>
-      <to>Update Auto Increment Value</to>
+      <from>Replace identical with ObjectAttributeID</from>
+      <to>Delete identical rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>Get Row Count - tbl_City</to>
+      <from>Select values</from>
+      <to>Replace identical with ObjectAttributeID</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2 2</from>
-      <to>Table input 2 2</to>
+      <from>TI_tbl_ObjectAttribute_Cust_DB</from>
+      <to>Merge Rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 4</from>
-      <to>Modified Java Script Value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table Get Last Updated Key Value</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input 2 2</from>
-      <to>Select values 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Update Auto Increment Value</from>
-      <to>Update Auto Increment Value 2</to>
+      <from>TI_tbl_ObjectAttribute_Dest_DB</from>
+      <to>Merge Rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Get Row Count - tbl_City</name>
-    <type>TableInput</type>
+    <name>Delete identical rows</name>
+    <type>Delete</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -607,13 +650,18 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection />
-    <sql>SELECT Count(*),? as auto_increment FROM tbl_City;</sql>
-    <limit>0</limit>
-    <lookup>Select values 2</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <connection>cr_cust_fk_check_off</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>${CR_CUST_DB_NAME}</schema>
+      <table>tbl_ObjectAttribute</table>
+      <key>
+        <name>flagfield</name>
+        <field>ObjectAttributeID</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -622,14 +670,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>80</yloc>
+      <xloc>1280</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Modified Java Script Value</name>
-    <type>ScriptValueMod</type>
+    <name>Merge Rows (diff)</name>
+    <type>MergeRows</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -638,41 +686,64 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var startUpdateKey = auto_increment;
-
-if(maxKey != null){
-	if(auto_increment &lt; maxKey){
-		startUpdateKey = maxKey;
-	}
-}
-var updateKey = row_count + startUpdateKey + 5;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
+    <keys>
+      <key>ObjectAttributeID</key>
+      <key>CustomerID</key>
+      <key>CreateDate</key>
+      <key>UpdateDate</key>
+      <key>SortOrder</key>
+      <key>Name</key>
+      <key>JavaDataType</key>
+    </keys>
+    <values>
+      <value>ObjectAttributeID</value>
+      <value>CustomerID</value>
+      <value>CreateDate</value>
+      <value>UpdateDate</value>
+      <value>SortOrder</value>
+      <value>Name</value>
+      <value>JavaDataType</value>
+    </values>
+    <flag_field>flagfield</flag_field>
+    <reference>TI_tbl_ObjectAttribute_Dest_DB</reference>
+    <compare>TI_tbl_ObjectAttribute_Cust_DB</compare>
+    <compare>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace identical with ObjectAttributeID</name>
+    <type>ReplaceString</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
     <fields>
       <field>
-        <name>updateKey</name>
-        <rename>updateKey</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>startUpdateKey</name>
-        <rename>startUpdateKey</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
+        <in_stream_name>flagfield</in_stream_name>
+        <out_stream_name />
+        <use_regex>no</use_regex>
+        <replace_string>identical</replace_string>
+        <replace_by_string />
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string>ObjectAttributeID</replace_field_by_string>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
       </field>
     </fields>
     <cluster_schema />
@@ -683,13 +754,13 @@ var updateKey = row_count + startUpdateKey + 5;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
-      <yloc>80</yloc>
+      <xloc>1056</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
+    <name>Select values</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -701,58 +772,10 @@ var updateKey = row_count + startUpdateKey + 5;
     </partitioning>
     <fields>
       <field>
-        <name>AUTO_INCREMENT</name>
-        <rename>auto_increment</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>auto_increment</name>
-        <rename>auto_increment</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2 2</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>auto_increment</name>
+        <name>ObjectAttributeID</name>
       </field>
       <field>
-        <name>Count(*)</name>
+        <name>flagfield</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -764,155 +787,14 @@ var updateKey = row_count + startUpdateKey + 5;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>80</yloc>
+      <xloc>848</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 4</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>maxKey</name>
-      </field>
-      <field>
-        <name>auto_increment</name>
-      </field>
-      <field>
-        <name>row_count</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1040</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table Get Last Updated Key Value</name>
+    <name>TI_tbl_ObjectAttribute_Cust_DB</name>
     <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_dest</connection>
-    <sql>SELECT AUTO_INCREMENT
-FROM  INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = '${CR_QA_DB_NAME}'
-AND   TABLE_NAME   = 'tbl_City';</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input 2 2</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection />
-    <sql>SELECT Max(CityID) as maxKey, ? as auto_increment,? as row_count FROM tbl_City;</sql>
-    <limit>0</limit>
-    <lookup>Select values 2 2</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update Auto Increment Value</name>
-    <type>ExecSQL</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_dest</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>ALTER TABLE tbl_City AUTO_INCREMENT = ?;</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-      <argument>
-        <name>updateKey</name>
-      </argument>
-    </arguments>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1456</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update Auto Increment Value 2</name>
-    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -922,24 +804,12 @@ AND   TABLE_NAME   = 'tbl_City';</sql>
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_on</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>SELECT @i:=?;
-UPDATE tbl_City AS d 
-SET CityID = @i:=@i+1 
-ORDER BY CityID ASC;</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-      <argument>
-        <name>startUpdateKey</name>
-      </argument>
-    </arguments>
+    <sql>SELECT * FROM tbl_ObjectAttribute;</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -948,8 +818,39 @@ ORDER BY CityID ASC;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
+      <xloc>153</xloc>
       <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TI_tbl_ObjectAttribute_Dest_DB</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>cr_dest</connection>
+    <sql>SELECT * FROM tbl_ObjectAttribute;</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>153</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

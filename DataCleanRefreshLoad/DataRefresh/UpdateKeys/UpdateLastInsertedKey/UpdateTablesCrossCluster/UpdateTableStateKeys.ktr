@@ -430,7 +430,7 @@
     <created_date>2018/01/23 11:00:49.113</created_date>
     <modified_user>-</modified_user>
     <modified_date>2018/01/23 11:00:49.113</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -614,28 +614,8 @@
   </connection>
   <order>
     <hop>
-      <from>Delete identical rows</from>
-      <to>Table Get Last Updated Key Value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge Rows (diff)</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Modified Java Script Value</from>
       <to>Update Auto Increment Value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Replace identical with StateID</from>
-      <to>Delete identical rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>Replace identical with StateID</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -664,16 +644,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>TI_tbl_State_Cust_DB</from>
-      <to>Merge Rows (diff)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>TI_tbl_State_Dest_DB</from>
-      <to>Merge Rows (diff)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Table input 2 2</from>
       <to>Select values 4</to>
       <enabled>Y</enabled>
@@ -685,8 +655,8 @@
     </hop>
   </order>
   <step>
-    <name>Delete identical rows</name>
-    <type>Delete</type>
+    <name>Get Row Count - tbl_City</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -696,17 +666,12 @@
       <schema_name />
     </partitioning>
     <connection>cr_cust_fk_check_off</connection>
-    <commit>100</commit>
-    <lookup>
-      <schema>${CR_CUST_DB_NAME}</schema>
-      <table>tbl_State</table>
-      <key>
-        <name>flagfield</name>
-        <field>StateID</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-    </lookup>
+    <sql>SELECT Count(*),? as auto_increment FROM tbl_State;</sql>
+    <limit>0</limit>
+    <lookup>Select values 2</lookup>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -715,57 +680,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>763</xloc>
-      <yloc>195</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge Rows (diff)</name>
-    <type>MergeRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <keys>
-      <key>StateID</key>
-      <key>CustomerID</key>
-      <key>Country_Alpha2</key>
-      <key>Name</key>
-      <key>Status</key>
-      <key>Type</key>
-      <key>CreateDate</key>
-      <key>UpdateDate</key>
-    </keys>
-    <values>
-      <value>StateID</value>
-      <value>CustomerID</value>
-      <value>Country_Alpha2</value>
-      <value>Name</value>
-      <value>Status</value>
-      <value>Type</value>
-      <value>CreateDate</value>
-      <value>UpdateDate</value>
-    </values>
-    <flag_field>flagfield</flag_field>
-    <reference>TI_tbl_State_Dest_DB</reference>
-    <compare>TI_tbl_State_Cust_DB</compare>
-    <compare>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>251</xloc>
-      <yloc>195</yloc>
+      <xloc>528</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -825,80 +741,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1435</xloc>
-      <yloc>323</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Replace identical with StateID</name>
-    <type>ReplaceString</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>flagfield</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>identical</replace_string>
-        <replace_by_string />
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string>StateID</replace_field_by_string>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>StateID</name>
-        <rename />
-      </field>
-      <field>
-        <name>flagfield</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>411</xloc>
-      <yloc>195</yloc>
+      <xloc>1136</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -945,8 +789,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1147</xloc>
-      <yloc>195</yloc>
+      <xloc>368</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -964,11 +808,9 @@ var updateKey = row_count + startUpdateKey + 10;
     <fields>
       <field>
         <name>auto_increment</name>
-        <rename />
       </field>
       <field>
         <name>Count(*)</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -980,8 +822,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1467</xloc>
-      <yloc>195</yloc>
+      <xloc>688</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -999,15 +841,12 @@ var updateKey = row_count + startUpdateKey + 10;
     <fields>
       <field>
         <name>maxKey</name>
-        <rename />
       </field>
       <field>
         <name>auto_increment</name>
-        <rename />
       </field>
       <field>
         <name>row_count</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1019,8 +858,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1595</xloc>
-      <yloc>323</yloc>
+      <xloc>960</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1053,101 +892,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>971</xloc>
-      <yloc>195</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Row Count - tbl_City</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_cust_fk_check_off</connection>
-    <sql>SELECT Count(*),? as auto_increment FROM tbl_State;</sql>
-    <limit>0</limit>
-    <lookup>Select values 2</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1307</xloc>
-      <yloc>195</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TI_tbl_State_Cust_DB</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_cust_fk_check_on</connection>
-    <sql>SELECT * FROM tbl_State;</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>139</xloc>
-      <yloc>115</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TI_tbl_State_Dest_DB</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>cr_dest</connection>
-    <sql>SELECT * FROM tbl_State;</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>139</xloc>
-      <yloc>307</yloc>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1177,8 +923,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1595</xloc>
-      <yloc>195</yloc>
+      <xloc>816</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1217,8 +963,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1211</xloc>
-      <yloc>323</yloc>
+      <xloc>1360</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1260,8 +1006,8 @@ ORDER BY StateID ASC;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>971</xloc>
-      <yloc>323</yloc>
+      <xloc>1600</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
