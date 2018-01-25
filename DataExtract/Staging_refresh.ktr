@@ -6,8 +6,14 @@
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
+      <parameter>
+        <name>CUSTOMERID</name>
+        <default_value />
+        <description />
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -430,7 +436,7 @@
     <created_date>2018/01/15 16:59:46.889</created_date>
     <modified_user>-</modified_user>
     <modified_date>2018/01/15 16:59:46.889</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -548,22 +554,20 @@ Completed STAGING Refresh Job
     <connection>cr_cust_fk_check_off</connection>
     <execute_each_row>N</execute_each_row>
     <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM tbl_DataLock_ExpenseReportHeader;
+    <sql>UPDATE tbl_TransactionCorporateAccount SET TransactionCorporateAccountID = 0 WHERE CustomerID=0 AND AccountCode='NA' AND AccountName='NA';
+
+
+
+DELETE FROM tbl_DataLock_ExpenseReportHeader;
 DELETE FROM tbl_DataLock_PAHeader;
 
--- START TO DO  Staging Specific --
+-- START DONE  Staging Specific --
 UPDATE tbl_Person SET EmailAddress = concat(replace(UserName, '@', '.'), CustomerID, '-', CEIL(RAND()*10000), '@chromewallet.com');
-DELETE f.* FROM tbl_Feedback f;
-
-
-
-
-
-
-
--- END TO DO  Staging Specific --
+TRUNCATE TABLE tbl_Feedback;
+INSERT INTO tbl_Feedback (CustomerID, Email) VALUES (${CUSTOMERID},CONCAT('email-',${CUSTOMERID},'@chromewallet.com'));
+-- END DONE  Staging Specific --
 
 
 
@@ -578,17 +582,13 @@ UPDATE tbl_ReportRun rr
 UPDATE tbl_ReportDefinitionInstance rdi SET rdi.Schedule='NONE' WHERE rdi.Schedule like ('%TIME%');
 
 
--- START TO DO  Staging Specific --
+-- START DONE  Staging Specific --
 UPDATE tbl_ReportDefinitionStep rds SET Value = 'other|smtp.chromefile.com|25|expense-noreply-staging@chromefile.com|workbugzilla' WHERE rds.Type = 'smtp_info';
 UPDATE tbl_NotificationEmail SET EmailAddress = 'NoSpecialCharAddress' WHERE EmailAddress LIKE '%\'%';
 
-
-
-
-
-
-
--- END TO DO  Staging Specific --
+SELECT @rowcnt:=0;
+UPDATE tbl_NotificationEmail set EmailAddress = concat('batch-notify-staging-',CustomerID,'-',Type,'-',@rowcnt:=@rowcnt+1,'@chromewallet.com');
+-- END DONE Staging Specific --
 
 
 
@@ -617,20 +617,44 @@ UPDATE tbl_ExpenseReportHeader erh
 
 
 -- START DONE Staging Specific --
-
 UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
 UPDATE tbl_PAHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
 UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) &lt;&gt; '';
 UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5));
 UPDATE tbl_AuditExport SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5)) where ReportID like '010%';
 UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('STAG',SUBSTR(InvoiceID, 5));
-
 -- END DONE Staging Specific --
 
 
-UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
+UPDATE tbl_AuthorizedUser SET PersonID = NULL;
 
-DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;</sql>
+DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;
+
+
+
+
+
+
+
+
+
+
+UPDATE tbl_ExpensePreAuthorization epa LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET epa.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND epa.ExpenseTransactionID IS NOT NULL;
+
+DELETE erlig.* FROM tbl_ExpenseReportLineItem_Guest erlig LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlig.ExpenseReportLineItemID IS NOT NULL; 
+DELETE erlis.* FROM tbl_ExpenseReportLineItemStep erlis LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlis.ExpenseReportLineItemID IS NOT NULL;
+DELETE erlit.* FROM tbl_ExpenseReportLineItemTrip erlit LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlit.ExpenseReportLineItemID IS NOT NULL;
+
+
+UPDATE tbl_TravelTransaction tt LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET tt.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND tt.ExpenseTransactionID IS NOT NULL;
+
+UPDATE tbl_ExpenseTransaction et left JOIN tbl_Feed f USING (FeedID) SET FeedID=NULL WHERE f.FeedID IS NULL AND et.FeedID IS NOT NULL;
+
+--UPDATE tbl_ExpenseTransaction et LEFT JOIN tbl_TransactionCorporateAccount tca USING (TransactionCorporateAccountID) SET et.TransactionCorporateAccountID = NULL WHERE tca.TransactionCorporateAccountID IS NULL;
+
+
+
+</sql>
     <set_params>N</set_params>
     <insert_field />
     <update_field />

@@ -623,8 +623,7 @@ UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3)) WHERE PoR
 UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3));
 
 
-UPDATE chrome_expense.tbl_AuthorizedUser SET PersonID = NULL;
-
+UPDATE tbl_AuthorizedUser SET PersonID = NULL;
 
 DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) WHERE et.ExpenseTransactionID IS NULL;
 
@@ -636,12 +635,12 @@ DELETE etg.* FROM tbl_ExpenseTransactionGrouping etg LEFT JOIN tbl_ExpenseTransa
 
 
 
-UPDATE tbl_ExpensePreAuthorization SET ExpenseTransactionID = NULL WHERE ExpenseTransactionID NOT IN (SELECT ExpenseTransactionID FROM tbl_ExpenseTransaction);
+UPDATE tbl_ExpensePreAuthorization epa LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET epa.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND epa.ExpenseTransactionID IS NOT NULL;
 
- 
-DELETE FROM tbl_ExpenseReportLineItem_Guest WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
-DELETE FROM tbl_ExpenseReportLineItemStep WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
-DELETE FROM tbl_ExpenseReportLineItemTrip WHERE ExpenseReportLineItemID NOT IN (SELECT ExpenseReportLineItemID FROM tbl_ExpenseReportLineItem);
+DELETE erlig.* FROM tbl_ExpenseReportLineItem_Guest erlig LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlig.ExpenseReportLineItemID IS NOT NULL; 
+DELETE erlis.* FROM tbl_ExpenseReportLineItemStep erlis LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlis.ExpenseReportLineItemID IS NOT NULL;
+DELETE erlit.* FROM tbl_ExpenseReportLineItemTrip erlit LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlit.ExpenseReportLineItemID IS NOT NULL;
+
 
 UPDATE tbl_TravelTransaction tt LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET tt.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND tt.ExpenseTransactionID IS NOT NULL;
 

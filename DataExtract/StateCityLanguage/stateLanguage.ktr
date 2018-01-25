@@ -551,13 +551,13 @@
   </connection>
   <order>
     <hop>
-      <from>TI - tbl_statelanguage</from>
-      <to>TO - tbl_statelanguage</to>
+      <from>TI - tbl_StateLanguage</from>
+      <to>TO - tbl_StateLanguage</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>TI - tbl_statelanguage</name>
+    <name>TI - tbl_StateLanguage</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -588,7 +588,7 @@
     </GUI>
   </step>
   <step>
-    <name>TO - tbl_statelanguage</name>
+    <name>TO - tbl_StateLanguage</name>
     <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>

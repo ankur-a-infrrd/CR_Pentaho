@@ -552,13 +552,13 @@
   </connection>
   <order>
     <hop>
-      <from>Table input tbl_city</from>
-      <to>Table output tbl_city</to>
+      <from>Table input tbl_City</from>
+      <to>Table output tbl_City</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Table input tbl_city</name>
+    <name>Table input tbl_City</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -589,7 +589,7 @@
     </GUI>
   </step>
   <step>
-    <name>Table output tbl_city</name>
+    <name>Table output tbl_City</name>
     <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>

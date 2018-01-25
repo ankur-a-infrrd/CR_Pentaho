@@ -4,6 +4,7 @@
   <description />
   <extended_description />
   <job_version />
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2018/01/22 14:07:20.391</created_date>
@@ -441,7 +442,9 @@
       <name>Drop FK constraint</name>
       <description />
       <type>SQL</type>
-      <sql>ALTER TABLE tbl_Person DROP FOREIGN KEY FK_Person_6;</sql>
+      <sql>ALTER TABLE tbl_Person DROP FOREIGN KEY FK_Person_6;
+ALTER TABLE tbl_Person_Person DROP FOREIGN KEY FK_tbl_Person_Person_1;
+ALTER TABLE tbl_Person_Person DROP FOREIGN KEY FK_tbl_Person_Person_2;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename />
@@ -457,7 +460,11 @@
       <name>Add FK Constraint</name>
       <description />
       <type>SQL</type>
-      <sql>ALTER TABLE tbl_Person ADD CONSTRAINT `FK_Person_6` FOREIGN KEY (`ReportsToPersonID`) REFERENCES `tbl_Person` (`PersonID`);</sql>
+      <sql>ALTER TABLE tbl_Person ADD CONSTRAINT `FK_Person_6` FOREIGN KEY (`ReportsToPersonID`) REFERENCES `tbl_Person` (`PersonID`);
+
+ALTER TABLE tbl_Person_Person ADD CONSTRAINT `FK_tbl_Person_Person_1` FOREIGN KEY (`FromPersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`);
+
+ALTER TABLE tbl_Person_Person ADD CONSTRAINT `FK_tbl_Person_Person_2` FOREIGN KEY (`ToPersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`);</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename />

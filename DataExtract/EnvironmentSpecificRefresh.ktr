@@ -10,6 +10,11 @@
     <directory>/</directory>
     <parameters>
       <parameter>
+        <name>CUSTOMERID</name>
+        <default_value />
+        <description />
+      </parameter>
+      <parameter>
         <name>ENVIRONMENT</name>
         <default_value />
         <description />
@@ -524,6 +529,18 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>CUSTOMERID</name>
+        <variable>${CUSTOMERID}</variable>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -612,6 +629,11 @@
     <group_field />
     <group_time />
     <parameters>
+      <variablemapping>
+        <variable>CUSTOMERID</variable>
+        <field>CUSTOMERID</field>
+        <input />
+      </variablemapping>
       <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
     <execution_result_target_step />

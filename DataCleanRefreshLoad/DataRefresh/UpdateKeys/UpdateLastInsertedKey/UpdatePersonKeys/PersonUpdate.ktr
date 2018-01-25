@@ -610,7 +610,11 @@
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>UPDATE tbl_Person SET ReportsToPersonID=? WHERE ReportsToPersonID=?; 
+    <sql>UPDATE tbl_Person SET ReportsToPersonID=? WHERE ReportsToPersonID=?;
+
+UPDATE tbl_Person_Person SET FromPersonID=? WHERE FromPersonID=?;
+UPDATE tbl_Person_Person SET ToPersonID=? WHERE ToPersonID=?;
+
 UPDATE tbl_Person SET PersonID=? WHERE PersonID=?;</sql>
     <set_params>N</set_params>
     <insert_field />
@@ -618,6 +622,18 @@ UPDATE tbl_Person SET PersonID=? WHERE PersonID=?;</sql>
     <delete_field />
     <read_field />
     <arguments>
+      <argument>
+        <name>ukey</name>
+      </argument>
+      <argument>
+        <name>PersonID</name>
+      </argument>
+      <argument>
+        <name>ukey</name>
+      </argument>
+      <argument>
+        <name>PersonID</name>
+      </argument>
       <argument>
         <name>ukey</name>
       </argument>
@@ -721,9 +737,11 @@ UPDATE tbl_Person SET PersonID=? WHERE PersonID=?;</sql>
     <fields>
       <field>
         <name>PersonID</name>
+        <rename />
       </field>
       <field>
         <name>ukey</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

@@ -1450,6 +1450,7 @@ CREATE TABLE `tbl_CustomerData` (
   `PersonalCreditCardEnabled` tinyint(1) DEFAULT '0' COMMENT 'Enables config screen for personal credit card integration set up',
   `IsPaidNotifyDelegate` tinyint(1) NOT NULL DEFAULT '0',
   `IsPaidNotifyCreator` tinyint(1) NOT NULL DEFAULT '0',
+  `UseProsper` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Enable access to PROSPER application',
   PRIMARY KEY (`CustomerID`),
   KEY `FK_tbl_Matter_1` (`PersonalMatterID`,`CustomerID`),
   KEY `FK_tbl_CustomerData_1` (`ExportEntityTypeID`,`CustomerID`),
