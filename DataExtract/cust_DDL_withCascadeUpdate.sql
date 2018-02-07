@@ -9275,7 +9275,7 @@ CREATE TABLE `tbl_TravelTransactionDetail` (
   CONSTRAINT `FK_tbl_TravelTransaction_tbl_TravelTransactionDetail_ID` FOREIGN KEY (`TravelTransactionID`) REFERENCES `tbl_TravelTransaction` (`TravelTransactionID`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15383839 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tbl_traveltransactionuda` (
+CREATE TABLE `tbl_TravelTransactionUDA` (
   `TravelTransactionUDAID` int(11) NOT NULL AUTO_INCREMENT,
   `TravelTransactionID` int(11) NOT NULL,
   `CustomerID` int(11) NOT NULL,
