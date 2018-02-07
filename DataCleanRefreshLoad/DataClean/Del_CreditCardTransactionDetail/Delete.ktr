@@ -443,13 +443,13 @@
   </notepads>
   <connection>
     <name>cr_dest</name>
-    <server>${CR_QA_DB_HOST}</server>
+    <server>${CR_DEST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CR_QA_DB_NAME}</database>
-    <port>${CR_QA_DB_PORT}</port>
-    <username>${CR_QA_DB_USER}</username>
-    <password>${CR_QA_DB_PASSWORD}</password>
+    <database>${CR_DEST_DB_NAME}</database>
+    <port>${CR_DEST_DB_PORT}</port>
+    <username>${CR_DEST_DB_USER}</username>
+    <password>${CR_DEST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -468,7 +468,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CR_QA_DB_PORT}</attribute>
+        <attribute>${CR_DEST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -521,7 +521,7 @@
     <connection>cr_dest</connection>
     <commit>100</commit>
     <lookup>
-      <schema>${CR_QA_DB_NAME}</schema>
+      <schema>${CR_DEST_DB_NAME}</schema>
       <table>tbl_CreditCardTransactionDetail</table>
       <key>
         <name>ccTransactionId</name>
