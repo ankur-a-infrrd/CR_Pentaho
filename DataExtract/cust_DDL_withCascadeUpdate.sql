@@ -5358,7 +5358,7 @@ CREATE TABLE `tbl_MatterHistory2` (
   CONSTRAINT `FK_tbl_MatterHistory2_Person` FOREIGN KEY (`CustomerID`, `PersonID`) REFERENCES `tbl_Person` (`CustomerID`, `PersonID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tbl_matteronselect` (
+CREATE TABLE `tbl_MatterOnSelect` (
   `MatterID` int(11) NOT NULL,
   `OnSelect` varchar(255) NOT NULL,
   `ExpenseReportItemTypeID` int(11) NOT NULL,
