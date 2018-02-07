@@ -466,7 +466,7 @@ CREATE TABLE `tbl_ButtonMenuItem` (
   CONSTRAINT `FK_tbl_ButtonMenu_2` FOREIGN KEY (`ExpenseReportItemTypeID`) REFERENCES `tbl_ExpenseReportItemType` (`ExpenseReportItemTypeID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tbl_carplan` (
+CREATE TABLE `tbl_CarPlan` (
   `CarPlanID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `CustomerID` int(11) NOT NULL,
   `PlanName` varchar(50) NOT NULL COMMENT 'Name of the Car Plan that appears in Car Plan selector UI',
