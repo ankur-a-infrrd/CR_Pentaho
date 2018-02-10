@@ -340,7 +340,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
+      <xloc>1104</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -376,8 +376,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1376</xloc>
-      <yloc>112</yloc>
+      <xloc>784</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>UpdateTableMaskKeys</name>
@@ -412,8 +412,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>224</yloc>
+      <xloc>1104</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>UpdateTableObjectAttributeKeys</name>
@@ -448,8 +448,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1376</xloc>
-      <yloc>336</yloc>
+      <xloc>784</xloc>
+      <yloc>464</yloc>
     </entry>
     <entry>
       <name>UpdateTableLocationCustomerKeys</name>
@@ -484,8 +484,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>448</yloc>
+      <xloc>1120</xloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>UpdateTableTransactionCorporateAccountKeys</name>
@@ -520,8 +520,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1376</xloc>
-      <yloc>560</yloc>
+      <xloc>784</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>DeleteCustomerZero</name>
@@ -556,8 +556,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1392</xloc>
-      <yloc>736</yloc>
+      <xloc>208</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>DeleteTableCityKeys</name>
@@ -628,8 +628,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>112</yloc>
+      <xloc>1104</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>DeleteTableMaskKeys</name>
@@ -664,8 +664,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1376</xloc>
-      <yloc>224</yloc>
+      <xloc>784</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>DeleteTableObjectAttributeKeys</name>
@@ -700,8 +700,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>336</yloc>
+      <xloc>1104</xloc>
+      <yloc>464</yloc>
     </entry>
     <entry>
       <name>DeleteTableLocationCustomerKeys</name>
@@ -736,8 +736,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1376</xloc>
-      <yloc>448</yloc>
+      <xloc>784</xloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>DeleteTableTransactionCorporateAccountKeys</name>
@@ -772,8 +772,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>560</yloc>
+      <xloc>1120</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>LookupUpdateDuplicatePrimaryKeys</name>
@@ -805,8 +805,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
-      <yloc>560</yloc>
+      <xloc>464</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>UpdateExistingStateKeys</name>
@@ -879,39 +879,6 @@
       <nr>0</nr>
       <xloc>560</xloc>
       <yloc>112</yloc>
-    </entry>
-    <entry>
-      <name>Transformation</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename />
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration />
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1728</xloc>
-      <yloc>736</yloc>
     </entry>
   </entries>
   <hops>
@@ -1024,24 +991,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Transformation</from>
-      <to>DeleteCustomerZero</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>LookupUpdateDuplicatePrimaryKeys</from>
-      <to>Transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>UpdateExistingStateKeys</to>
       <from_nr>0</from_nr>
@@ -1062,6 +1011,15 @@
     <hop>
       <from>UpdateExistingCityKeys</from>
       <to>DeleteTableCityKeys</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>LookupUpdateDuplicatePrimaryKeys</from>
+      <to>DeleteCustomerZero</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

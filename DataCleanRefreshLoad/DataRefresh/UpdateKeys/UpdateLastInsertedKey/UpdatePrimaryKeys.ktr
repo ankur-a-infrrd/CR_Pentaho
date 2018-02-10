@@ -871,7 +871,7 @@ ORDER BY ${COLUMN_NAME} ASC;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1500</xloc>
+      <xloc>1488</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>

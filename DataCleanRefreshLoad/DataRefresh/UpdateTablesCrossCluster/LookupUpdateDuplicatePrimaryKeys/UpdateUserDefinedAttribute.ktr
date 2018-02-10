@@ -713,27 +713,9 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
 
-if(ff = 'identical'){
+if(flagfield = 'identical'){
 	var updateKey = maxId + valuename;
 }</jsScript_script>
-      </jsScript>
-      <jsScript>
-        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>fireToDB_Sample</jsScript_name>
-        <jsScript_script>// Fires a SQL-Statement to a valid Pentaho / Kettle connection
-// and returns, if possible, an array.
-// This should only be used for SELECT statements.
-//
-// Usage:
-// fireToDB(var,var);
-// 1: String - The Name of the Connection.
-// 2: String - The SQL to send.
-//
-// 2006-11-15
-//
-var strConn = "MY Connection";
-var strSQL = "SELECT COUNT(*) FROM ...";
-var xArr = fireToDB(strConn, strSQL);</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>

@@ -443,7 +443,7 @@ DATA REFRESH JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1856</xloc>
+      <xloc>1520</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -476,7 +476,7 @@ DATA REFRESH JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1680</xloc>
+      <xloc>1344</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>

@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>cr_cust_fk_check_off</name>
-    <server>localhost</server>
+    <server>${CR_CUST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>chrome_expense_cust</database>
-    <port>3306</port>
-    <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
+    <database>${CR_CUST_DB_NAME}</database>
+    <port>${CR_CUST_DB_PORT}</port>
+    <username>${CR_CUST_DB_USER}</username>
+    <password>${CR_CUST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -463,7 +463,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3306</attribute>
+        <attribute>${CR_CUST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -497,13 +497,13 @@
   </connection>
   <connection>
     <name>cr_dest</name>
-    <server>${CHROMERIVER_DB_HOST}</server>
+    <server>${CR_DEST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>chrome_expense</database>
-    <port>${CHROMERIVER_DB_PORT}</port>
-    <username>${CHROMERIVER_DB_USERNAME}</username>
-    <password>${CHROMERIVER_DB_PASSWORD}</password>
+    <database>${CR_DEST_DB_NAME}</database>
+    <port>${CR_DEST_DB_PORT}</port>
+    <username>${CR_DEST_DB_USER}</username>
+    <password>${CR_DEST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -522,7 +522,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CHROMERIVER_DB_PORT}</attribute>
+        <attribute>${CR_DEST_DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -679,15 +679,12 @@ AS SELECT * FROM tbl_BusinessRulesImpl;</sql>
     <fields>
       <field>
         <name>Type</name>
-        <rename />
       </field>
       <field>
         <name>DrlText</name>
-        <rename />
       </field>
       <field>
         <name>IsCurrent</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
