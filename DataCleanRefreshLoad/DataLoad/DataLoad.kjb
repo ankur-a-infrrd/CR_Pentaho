@@ -11,7 +11,17 @@
   <modified_user>-</modified_user>
   <modified_date>2018/01/16 11:02:55.224</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>CUSTOMERID</name>
+      <default_value />
+      <description />
+    </parameter>
+    <parameter>
+      <name>ENVIRONMENT</name>
+      <default_value />
+      <description />
+    </parameter>
+  </parameters>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -385,12 +395,12 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>UpdateCustomerDataDestKeys</name>
+      <name>UpdateCustomerDataAndBusinessRuleImpl</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/UpdateCustomerDataDestKeys.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/UpdateCustomerDataAndBusinessRuleImpl.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -413,11 +423,21 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>ENVIRONMENT</name>
+          <stream_name />
+          <value>${ENVIRONMENT}</value>
+        </parameter>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>784</xloc>
+      <xloc>848</xloc>
       <yloc>96</yloc>
     </entry>
   </entries>
@@ -442,7 +462,7 @@
     </hop>
     <hop>
       <from>Load Customer Data</from>
-      <to>UpdateCustomerDataDestKeys</to>
+      <to>UpdateCustomerDataAndBusinessRuleImpl</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

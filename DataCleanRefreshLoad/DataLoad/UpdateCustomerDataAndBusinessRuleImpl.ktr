@@ -11,22 +11,12 @@
     <parameters>
       <parameter>
         <name>CUSTOMERID</name>
-        <default_value>154</default_value>
-        <description />
-      </parameter>
-      <parameter>
-        <name>DESTINATION_CLUSTER</name>
-        <default_value>C3</default_value>
+        <default_value />
         <description />
       </parameter>
       <parameter>
         <name>ENVIRONMENT</name>
-        <default_value>STAGING</default_value>
-        <description />
-      </parameter>
-      <parameter>
-        <name>SOURCE_CLUSTER</name>
-        <default_value>C4</default_value>
+        <default_value />
         <description />
       </parameter>
     </parameters>
@@ -545,6 +535,10 @@
         <attribute>${CR_DEST_DB_PORT}</attribute>
       </attribute>
       <attribute>
+        <code>PREFERRED_SCHEMA_NAME</code>
+        <attribute>chrome_expense</attribute>
+      </attribute>
+      <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -581,32 +575,32 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>QA Check count greater than zero</from>
-      <to>Switch / Case</to>
+      <from>Modified Java Script Value</from>
+      <to>Switch / Case 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select count from destination</from>
-      <to>QA Check count greater than zero</to>
+      <from>Select values 2</from>
+      <to>Modified Java Script Value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Row Count tbl_BusinessRulesImpl Destination</from>
+      <from>Table input</from>
       <to>Get Variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Get Variables</from>
-      <to>Select count from destination</to>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Switch / Case</from>
+      <from>Switch / Case 2</from>
       <to>Execute BusinessRuleImpl Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Switch / Case</from>
+      <from>Switch / Case 2</from>
       <to>Dont Update Rows</to>
       <enabled>Y</enabled>
     </hop>
@@ -630,8 +624,62 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
-      <yloc>336</yloc>
+      <xloc>928</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute BusinessRuleImpl Update</name>
+    <type>TransExecutor</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id />
+    <trans_name />
+    <filename>${Internal.Job.Filename.Directory}/UpdateBusinessRuleImpl.ktr</filename>
+    <directory_path />
+    <group_size>1</group_size>
+    <group_field />
+    <group_time />
+    <parameters>
+      <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    <execution_result_target_step />
+    <execution_time_field>ExecutionTime</execution_time_field>
+    <execution_result_field>ExecutionResult</execution_result_field>
+    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
+    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
+    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
+    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
+    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
+    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
+    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
+    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
+    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
+    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
+    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
+    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
+    <result_rows_target_step />
+    <result_files_target_step />
+    <result_files_file_name_field>FileName</result_files_file_name_field>
+    <executors_output_step />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -648,45 +696,9 @@
     </partitioning>
     <fields>
       <field>
-        <name>source_cluster</name>
-        <variable>${SOURCE_CLUSTER}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>destination_cluster</name>
-        <variable>${DESTINATION_CLUSTER}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>environment</name>
         <variable>${ENVIRONMENT}</variable>
         <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CUSTID</name>
-        <variable>${CUSTOMERID}</variable>
-        <type>Integer</type>
         <format />
         <currency />
         <decimal />
@@ -704,8 +716,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>240</yloc>
+      <xloc>224</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1377,7 +1389,7 @@
     </GUI>
   </step>
   <step>
-    <name>QA Check count greater than zero</name>
+    <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description />
     <distribute>Y</distribute>
@@ -1419,13 +1431,13 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>240</yloc>
+      <xloc>512</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select count from destination</name>
+    <name>Select values 2</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -1437,19 +1449,7 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
     </partitioning>
     <fields>
       <field>
-        <name>source_cluster</name>
-        <rename />
-      </field>
-      <field>
-        <name>destination_cluster</name>
-        <rename />
-      </field>
-      <field>
         <name>environment</name>
-        <rename />
-      </field>
-      <field>
-        <name>CUSTID</name>
         <rename />
       </field>
       <field>
@@ -1466,13 +1466,13 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>240</yloc>
+      <xloc>352</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Switch / Case</name>
+    <name>Switch / Case 2</name>
     <type>SwitchCase</type>
     <description />
     <distribute>Y</distribute>
@@ -1507,13 +1507,13 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>240</yloc>
+      <xloc>672</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Row Count tbl_BusinessRulesImpl Destination</name>
+    <name>Table input</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -1538,8 +1538,8 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>240</yloc>
+      <xloc>112</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1571,75 +1571,6 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
     <GUI>
       <xloc>144</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Execute BusinessRuleImpl Update</name>
-    <type>TransExecutor</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id />
-    <trans_name />
-    <filename>${Internal.Job.Filename.Directory}/UpdateBusinessRuleImpl.ktr</filename>
-    <directory_path />
-    <group_size>1</group_size>
-    <group_field />
-    <group_time />
-    <parameters>
-      <variablemapping>
-        <variable>SOURCE_CLUSTER</variable>
-        <field>source_cluster</field>
-        <input />
-      </variablemapping>
-      <variablemapping>
-        <variable>DESTINATION_CLUSTER</variable>
-        <field>destination_cluster</field>
-        <input />
-      </variablemapping>
-      <variablemapping>
-        <variable>ENVIRONMENT</variable>
-        <field>environment</field>
-        <input />
-      </variablemapping>
-      <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    <execution_result_target_step />
-    <execution_time_field>ExecutionTime</execution_time_field>
-    <execution_result_field>ExecutionResult</execution_result_field>
-    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
-    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
-    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
-    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
-    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
-    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
-    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
-    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
-    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
-    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
-    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
-    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step />
-    <result_files_target_step />
-    <result_files_file_name_field>FileName</result_files_file_name_field>
-    <executors_output_step />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1328</xloc>
-      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

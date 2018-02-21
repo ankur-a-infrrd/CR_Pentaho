@@ -303,7 +303,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>96</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -339,7 +339,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>288</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -375,7 +375,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>496</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -411,7 +411,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>784</xloc>
+      <xloc>672</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -447,7 +447,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>992</xloc>
+      <xloc>880</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -483,7 +483,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
+      <xloc>1104</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -519,7 +519,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1488</xloc>
+      <xloc>1376</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -555,7 +555,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1488</xloc>
+      <xloc>1376</xloc>
       <yloc>304</yloc>
     </entry>
     <entry>
@@ -591,7 +591,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1312</xloc>
+      <xloc>1200</xloc>
       <yloc>304</yloc>
     </entry>
     <entry>
@@ -627,7 +627,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1072</xloc>
+      <xloc>960</xloc>
       <yloc>304</yloc>
     </entry>
     <entry>
@@ -663,7 +663,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>848</xloc>
+      <xloc>736</xloc>
       <yloc>304</yloc>
     </entry>
     <entry>
@@ -699,7 +699,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>512</xloc>
       <yloc>304</yloc>
     </entry>
   </entries>

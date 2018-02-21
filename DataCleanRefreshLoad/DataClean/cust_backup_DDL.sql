@@ -15,7 +15,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-use chrome_expense_etl;
+use chrome_expense_etl_backup_${CUSTOMERID};
 
 CREATE TABLE `tbl_AnalyticsControlOptions` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,

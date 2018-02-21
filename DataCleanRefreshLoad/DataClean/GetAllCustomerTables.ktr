@@ -466,6 +466,10 @@
         <attribute>${CR_DEST_DB_PORT}</attribute>
       </attribute>
       <attribute>
+        <code>PREFERRED_SCHEMA_NAME</code>
+        <attribute>chrome_expense</attribute>
+      </attribute>
+      <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -557,7 +561,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>688</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -579,7 +583,7 @@
     WHERE COLUMN_NAME IN ('CustomerID')
         AND TABLE_SCHEMA='${CR_DEST_DB_NAME}' AND TABLE_NAME LIKE 'tbl_%' AND TABLE_NAME not in ('tbl_CustomerDirectPayBankAccount',
 'tbl_PersonDirectPayCreditCard','tbl_PersonDirectPayBankAccount','tbl_PersonYodleeCreditCard','tbl_QueueEntryDirectPayExportCustomer','tbl_CustomerPublicKey','tbl_PublicKey','tbl_KratosEntity',
-'tbl_KratosMachine','tbl_AuthorizedUser','tbl_CustomerSamlSSO','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_EncryptedPersonLookup','tbl_BusinessRules','tbl_CustomerData');</sql>
+'tbl_KratosMachine','tbl_AuthorizedUser','tbl_CustomerSamlSSO','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_EncryptedPersonLookup','tbl_BusinessRules','tbl_BusinessRulesImpl','tbl_CustomerData');</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>

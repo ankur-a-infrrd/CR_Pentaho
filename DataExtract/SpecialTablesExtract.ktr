@@ -591,11 +591,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Table output tbl_BusinessRulesImpl</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Table input tbl_AuditExport</from>
       <to>Table output tbl_AuditExport</to>
       <enabled>Y</enabled>
@@ -603,11 +598,6 @@
     <hop>
       <from>Table input tbl_AuditExportInvoice</from>
       <to>Table output tbl_AuditExportInvoice</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input tbl_BusinessRulesImpl</from>
-      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -715,37 +705,12 @@
       <to>TO - tbl_tcagroupmapping</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Table input tbl_BusinessRulesImpl</from>
+      <to>Table output tbl_BusinessRulesImpl</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>pkgData</name>
-      </remove>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1328</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>TI - tbl_BatchProcessUserData</name>
     <type>TableInput</type>
@@ -2350,7 +2315,7 @@ SELECT m.* FROM tbl_Matter m JOIN tbl_CustomerData cd ON m.MatterID=cd.PersonalM
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1552</xloc>
+      <xloc>1424</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>

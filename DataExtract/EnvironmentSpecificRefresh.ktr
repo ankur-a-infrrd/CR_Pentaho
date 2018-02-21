@@ -556,47 +556,6 @@
     </GUI>
   </step>
   <step>
-    <name>Switch / Case</name>
-    <type>SwitchCase</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fieldname>environment</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format />
-    <case_value_decimal />
-    <case_value_group />
-    <default_target_step>QA Refresh</default_target_step>
-    <cases>
-      <case>
-        <value>QA</value>
-        <target_step>QA Refresh</target_step>
-      </case>
-      <case>
-        <value>STAGING</value>
-        <target_step>Staging Refresh</target_step>
-      </case>
-    </cases>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>QA Refresh</name>
     <type>JobExecutor</type>
     <description />
@@ -704,6 +663,47 @@
     <GUI>
       <xloc>784</xloc>
       <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Switch / Case</name>
+    <type>SwitchCase</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fieldname>environment</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format />
+    <case_value_decimal />
+    <case_value_group />
+    <default_target_step>QA Refresh</default_target_step>
+    <cases>
+      <case>
+        <value>QA</value>
+        <target_step>QA Refresh</target_step>
+      </case>
+      <case>
+        <value>STAGING</value>
+        <target_step>Staging Refresh</target_step>
+      </case>
+    </cases>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

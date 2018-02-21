@@ -503,11 +503,12 @@
       <name>DropAndCreateCustSchema</name>
       <description />
       <type>SQL</type>
-      <sql>DROP DATABASE `chrome_expense_cust`;
+      <sql>DROP DATABASE `chrome_expense_etl`;
 Commit;
 
-CREATE DATABASE `chrome_expense_cust`;
-Commit;</sql>
+CREATE DATABASE `chrome_expense_etl`;
+Commit;
+use chrome_expense_etl;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename />

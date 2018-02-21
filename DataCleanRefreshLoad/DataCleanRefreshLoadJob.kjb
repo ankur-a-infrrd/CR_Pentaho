@@ -314,8 +314,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>200</xloc>
-      <yloc>100</yloc>
+      <xloc>336</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>Data Clean Job</name>
@@ -352,8 +352,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>100</yloc>
+      <xloc>624</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>Data Refresh Job</name>
@@ -395,8 +395,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>600</xloc>
-      <yloc>100</yloc>
+      <xloc>480</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>Data Load Job</name>
@@ -423,19 +423,39 @@
       <pass_export>N</pass_export>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>SOURCE_CLUSTER</name>
+          <stream_name />
+          <value>${SOURCE_CLUSTER}</value>
+        </parameter>
+        <parameter>
+          <name>DESTINATION_CLUSTER</name>
+          <stream_name />
+          <value>${DESTINATION_CLUSTER}</value>
+        </parameter>
+        <parameter>
+          <name>ENVIRONMENT</name>
+          <stream_name />
+          <value>${ENVIRONMENT}</value>
+        </parameter>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>768</xloc>
       <yloc>96</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Data Clean Job</to>
+      <to>Data Refresh Job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -443,8 +463,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Data Clean Job</from>
-      <to>Data Refresh Job</to>
+      <from>Data Refresh Job</from>
+      <to>Data Clean Job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -452,7 +472,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Data Refresh Job</from>
+      <from>Data Clean Job</from>
       <to>Data Load Job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

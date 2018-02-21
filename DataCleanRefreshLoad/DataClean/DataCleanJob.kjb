@@ -13,10 +13,73 @@
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
-      <default_value>154</default_value>
+      <default_value />
       <description />
     </parameter>
   </parameters>
+  <connection>
+    <name>cr_dest</name>
+    <server>${CR_DEST_DB_HOST}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${CR_DEST_DB_NAME}</database>
+    <port>${CR_DEST_DB_PORT}</port>
+    <username>${CR_DEST_DB_USER}</username>
+    <password>${CR_DEST_DB_PASSWORD}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${CR_DEST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PREFERRED_SCHEMA_NAME</code>
+        <attribute>chrome_expense</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET foreign_key_checks = 0;</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -335,7 +398,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1056</xloc>
+      <xloc>1424</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -371,7 +434,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1360</xloc>
+      <xloc>1728</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -429,7 +492,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>240</xloc>
+      <xloc>608</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -467,7 +530,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>816</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -505,7 +568,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>992</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -543,7 +606,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>1136</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -581,7 +644,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1328</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -619,7 +682,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1168</xloc>
+      <xloc>1536</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -657,7 +720,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1360</xloc>
+      <xloc>1728</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -674,8 +737,42 @@ DATA CLEAN JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>1200</xloc>
       <yloc>288</yloc>
+    </entry>
+    <entry>
+      <name>DropAndCreateCustSchema</name>
+      <description />
+      <type>SQL</type>
+      <sql>CREATE DATABASE `chrome_expense_etl_backup_${CUSTOMERID}`;
+Commit;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_dest</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>192</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>Execute_customer_DDLs</name>
+      <description />
+      <type>SQL</type>
+      <sql />
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Entry.Current.Directory}/cust_backup_DDL.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cr_dest</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>80</yloc>
     </entry>
   </entries>
   <hops>
@@ -687,15 +784,6 @@ DATA CLEAN JOB COMPLETED
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Del_CreditCardTransactionDetail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Del_CreditCardTransactionDetail</from>
@@ -763,6 +851,33 @@ DATA CLEAN JOB COMPLETED
     <hop>
       <from>CleanCustomerData</from>
       <to>Write To Log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>DropAndCreateCustSchema</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>DropAndCreateCustSchema</from>
+      <to>Execute_customer_DDLs</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Execute_customer_DDLs</from>
+      <to>Del_CreditCardTransactionDetail</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
