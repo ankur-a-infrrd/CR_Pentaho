@@ -377,12 +377,12 @@
       <yloc>80</yloc>
     </entry>
     <entry>
-      <name>GetCRTableNameFromCSV</name>
+      <name>GetTableNamesForExtract</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Repository.Directory}/csv_transform.ktr</filename>
+      <filename>${Internal.Job.Repository.Directory}/GetTableNamesForExtract.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -643,7 +643,7 @@ DATA EXTRACT JOB COMPLETED
   </entries>
   <hops>
     <hop>
-      <from>GetCRTableNameFromCSV</from>
+      <from>GetTableNamesForExtract</from>
       <to>PopulateCRTables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -698,7 +698,7 @@ DATA EXTRACT JOB COMPLETED
     </hop>
     <hop>
       <from>Special Tables Extract</from>
-      <to>GetCRTableNameFromCSV</to>
+      <to>GetTableNamesForExtract</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
