@@ -398,8 +398,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1424</xloc>
-      <yloc>288</yloc>
+      <xloc>512</xloc>
+      <yloc>496</yloc>
     </entry>
     <entry>
       <name>GetSchemaTablesWithCustomerID</name>
@@ -434,8 +434,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
-      <yloc>288</yloc>
+      <xloc>704</xloc>
+      <yloc>496</yloc>
     </entry>
     <entry>
       <name>START</name>
@@ -454,8 +454,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
-      <yloc>80</yloc>
+      <xloc>304</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>Del_CreditCardTransactionDetail</name>
@@ -492,8 +492,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>80</yloc>
+      <xloc>880</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>Del_DirectPayExportFile</name>
@@ -530,8 +530,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
-      <yloc>80</yloc>
+      <xloc>880</xloc>
+      <yloc>208</yloc>
     </entry>
     <entry>
       <name>Del_ExpenseExportData</name>
@@ -568,8 +568,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>992</xloc>
-      <yloc>80</yloc>
+      <xloc>672</xloc>
+      <yloc>208</yloc>
     </entry>
     <entry>
       <name>Del_FeedGroup</name>
@@ -606,8 +606,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1136</xloc>
-      <yloc>80</yloc>
+      <xloc>512</xloc>
+      <yloc>208</yloc>
     </entry>
     <entry>
       <name>Del_PreLoad_Staged_Reference</name>
@@ -644,8 +644,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1328</xloc>
-      <yloc>80</yloc>
+      <xloc>304</xloc>
+      <yloc>208</yloc>
     </entry>
     <entry>
       <name>Del_TCAGroupMapping</name>
@@ -682,8 +682,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1536</xloc>
-      <yloc>80</yloc>
+      <xloc>304</xloc>
+      <yloc>368</yloc>
     </entry>
     <entry>
       <name>Del_StateLanguage</name>
@@ -720,8 +720,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
-      <yloc>80</yloc>
+      <xloc>496</xloc>
+      <yloc>368</yloc>
     </entry>
     <entry>
       <name>Write To Log</name>
@@ -737,11 +737,11 @@ DATA CLEAN JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
-      <yloc>288</yloc>
+      <xloc>304</xloc>
+      <yloc>496</yloc>
     </entry>
     <entry>
-      <name>DropAndCreateCustSchema</name>
+      <name>CreateBackupETLSchema</name>
       <description />
       <type>SQL</type>
       <sql>CREATE DATABASE `chrome_expense_etl_backup_${CUSTOMERID}`;
@@ -755,11 +755,11 @@ Commit;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>80</yloc>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
-      <name>Execute_customer_DDLs</name>
+      <name>Execute_customer_backup_DDLs</name>
       <description />
       <type>SQL</type>
       <sql />
@@ -771,8 +771,122 @@ Commit;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>80</yloc>
+      <xloc>656</xloc>
+      <yloc>64</yloc>
+    </entry>
+    <entry>
+      <name>Del_FinalLiquidationExportData</name>
+      <description />
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id />
+      <filename>${Internal.Job.Filename.Directory}\Del_FinalLiquidationExportData\Delete_FinalLiquidationExportData.kjb</filename>
+      <jobname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name />
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>688</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>Del_LiquidationExportData</name>
+      <description />
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id />
+      <filename>${Internal.Job.Filename.Directory}\Del_LiquidationExportData\Delete_LiquidationExportData.kjb</filename>
+      <jobname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name />
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>896</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>Del_TravelTicket</name>
+      <description />
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id />
+      <filename>${Internal.Job.Filename.Directory}\Del_TravelTicket\Delete_TravelTicket.kjb</filename>
+      <jobname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name />
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>896</xloc>
+      <yloc>496</yloc>
     </entry>
   </entries>
   <hops>
@@ -840,15 +954,6 @@ Commit;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Del_StateLanguage</from>
-      <to>GetSchemaTablesWithCustomerID</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>CleanCustomerData</from>
       <to>Write To Log</to>
       <from_nr>0</from_nr>
@@ -859,7 +964,7 @@ Commit;
     </hop>
     <hop>
       <from>START</from>
-      <to>DropAndCreateCustSchema</to>
+      <to>CreateBackupETLSchema</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -867,8 +972,8 @@ Commit;
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>DropAndCreateCustSchema</from>
-      <to>Execute_customer_DDLs</to>
+      <from>CreateBackupETLSchema</from>
+      <to>Execute_customer_backup_DDLs</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -876,8 +981,44 @@ Commit;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Execute_customer_DDLs</from>
+      <from>Execute_customer_backup_DDLs</from>
       <to>Del_CreditCardTransactionDetail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Del_StateLanguage</from>
+      <to>Del_FinalLiquidationExportData</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Del_FinalLiquidationExportData</from>
+      <to>Del_LiquidationExportData</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Del_LiquidationExportData</from>
+      <to>Del_TravelTicket</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Del_TravelTicket</from>
+      <to>GetSchemaTablesWithCustomerID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

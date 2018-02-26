@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DeleteCustomerZero</name>
+    <name>Delete_FinalLiquidationExportData</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
+      <parameter>
+        <name>finalLiquidationExportDataID</name>
+        <default_value />
+        <description />
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -427,23 +433,23 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/01/23 14:04:09.069</created_date>
+    <created_date>2018/02/21 17:43:33.017</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/01/23 14:04:09.069</modified_date>
+    <modified_date>2018/02/21 17:43:33.017</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>cr_cust_fk_check_off</name>
-    <server>${CR_CUST_DB_HOST}</server>
+    <name>cr_dest</name>
+    <server>${CR_DEST_DB_HOST}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>${CR_CUST_DB_NAME}</database>
-    <port>${CR_CUST_DB_PORT}</port>
-    <username>${CR_CUST_DB_USER}</username>
-    <password>${CR_CUST_DB_PASSWORD}</password>
+    <database>${CR_DEST_DB_NAME}</database>
+    <port>${CR_DEST_DB_PORT}</port>
+    <username>${CR_DEST_DB_USER}</username>
+    <password>${CR_DEST_DB_PASSWORD}</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -462,7 +468,11 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${CR_CUST_DB_PORT}</attribute>
+        <attribute>${CR_DEST_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PREFERRED_SCHEMA_NAME</code>
+        <attribute>chrome_expense</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -474,7 +484,7 @@
       </attribute>
       <attribute>
         <code>SQL_CONNECT</code>
-        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+        <attribute>SET foreign_key_checks = 0;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
@@ -496,30 +506,30 @@
   </connection>
   <order>
     <hop>
-      <from>Generate Rows</from>
-      <to>Delete</to>
+      <from>Get Variables</from>
+      <to>DeleteFinalLiquidationExportData</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Delete</name>
+    <name>DeleteFinalLiquidationExportData</name>
     <type>Delete</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cr_cust_fk_check_off</connection>
+    <connection>cr_dest</connection>
     <commit>100</commit>
     <lookup>
-      <schema>${CR_CUST_DB_NAME}</schema>
-      <table>tbl_Customer</table>
+      <schema>${CR_DEST_DB_NAME}</schema>
+      <table>tbl_FinalLiquidationExportData</table>
       <key>
-        <name>zero</name>
-        <field>CustomerID</field>
+        <name>finalLiquidationExportDataID</name>
+        <field>FinalLiquidationExportDataID</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -532,16 +542,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>160</yloc>
+      <xloc>685</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Generate Rows</name>
-    <type>RowGenerator</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
@@ -550,23 +560,18 @@
     </partitioning>
     <fields>
       <field>
-        <name>zero</name>
-        <type>Integer</type>
+        <name>finalLiquidationExportDataID</name>
+        <variable>${finalLiquidationExportDataID}</variable>
+        <type>String</type>
         <format />
         <currency />
         <decimal />
         <group />
-        <nullif>0</nullif>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <trim_type>none</trim_type>
       </field>
     </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -575,8 +580,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>160</yloc>
+      <xloc>301</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

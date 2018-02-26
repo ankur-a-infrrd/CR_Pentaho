@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Delete_FeedGroup</name>
+  <name>Delete_LiquidationExportData</name>
   <description />
   <extended_description />
   <job_version />
   <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/01/05 11:43:00.257</created_date>
+  <created_date>2018/02/21 18:22:42.332</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2018/01/05 11:43:00.257</modified_date>
+  <modified_date>2018/02/21 18:22:42.332</modified_date>
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
@@ -309,16 +309,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
+      <xloc>277</xloc>
+      <yloc>95</yloc>
     </entry>
     <entry>
-      <name>FeedGroup</name>
+      <name>LiquidationExportData</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/FeedGroup.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/LiquidationExportData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -350,16 +350,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>96</yloc>
+      <xloc>485</xloc>
+      <yloc>95</yloc>
     </entry>
     <entry>
-      <name>Delete-FeedGroup</name>
+      <name>Delete_LiquidationExportData</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/Delete_FeedGroup.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/Delete_LiquidationExportData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>Y</params_from_previous>
@@ -383,22 +383,22 @@
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
-          <name>feedGroupID</name>
-          <stream_name>feedGroupID</stream_name>
+          <name>liquidationExportDataID</name>
+          <stream_name>liquidationExportDataID</stream_name>
           <value />
         </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>96</yloc>
+      <xloc>693</xloc>
+      <yloc>95</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>FeedGroup</to>
+      <to>LiquidationExportData</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -406,8 +406,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>FeedGroup</from>
-      <to>Delete-FeedGroup</to>
+      <from>LiquidationExportData</from>
+      <to>Delete_LiquidationExportData</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

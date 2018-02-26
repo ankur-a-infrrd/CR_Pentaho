@@ -624,7 +624,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>944</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -678,8 +678,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>144</yloc>
+      <xloc>944</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1450,7 +1450,6 @@ if(count > 0 &amp;&amp; trim(environment) == "QA"){
     <fields>
       <field>
         <name>environment</name>
-        <rename />
       </field>
       <field>
         <name>Count(*)</name>

@@ -303,3 +303,8 @@ tbl_UserDefinedAttributeLookup
 tbl_UserDefinedInvoiceDataPivot
 tbl_UserDefinedPoReqDataPivot
 tbl_UserSession
+tbl_ExpenseImageMerchantDetails
+tbl_ExpenseImageVatDetails
+tbl_ExpenseReportReceiptCheckIn
+tbl_FinalLiquidationExport
+tbl_LiquidationExport

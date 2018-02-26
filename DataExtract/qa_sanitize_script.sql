@@ -88,7 +88,7 @@ UPDATE tbl_ExpensePreAuthorization epa LEFT JOIN tbl_ExpenseTransaction et USING
 DELETE erlig.* FROM tbl_ExpenseReportLineItem_Guest erlig LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlig.ExpenseReportLineItemID IS NOT NULL; 
 DELETE erlis.* FROM tbl_ExpenseReportLineItemStep erlis LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlis.ExpenseReportLineItemID IS NOT NULL;
 DELETE erlit.* FROM tbl_ExpenseReportLineItemTrip erlit LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlit.ExpenseReportLineItemID IS NOT NULL;
-
+DELETE erlimp.* FROM tbl_ExpenseReportLineItem_MatterProposed erlimp LEFT JOIN tbl_ExpenseReportLineItem erli USING (ExpenseReportLineItemID) WHERE erli.ExpenseReportLineItemID IS NULL AND erlimp.ExpenseReportLineItemID IS NOT NULL;
 
 UPDATE tbl_TravelTransaction tt LEFT JOIN tbl_ExpenseTransaction et USING (ExpenseTransactionID) SET tt.ExpenseTransactionID=NULL WHERE et.ExpenseTransactionID IS NULL AND tt.ExpenseTransactionID IS NOT NULL;
 

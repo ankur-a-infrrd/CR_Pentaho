@@ -4,13 +4,19 @@
   <description />
   <extended_description />
   <job_version />
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2018/01/05 13:06:57.620</created_date>
   <modified_user>-</modified_user>
   <modified_date>2018/01/05 13:06:57.620</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>CUSTOMERID</name>
+      <default_value />
+      <description />
+    </parameter>
+  </parameters>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -335,6 +341,11 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>CUSTOMERID</name>
+          <stream_name />
+          <value>${CUSTOMERID}</value>
+        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>

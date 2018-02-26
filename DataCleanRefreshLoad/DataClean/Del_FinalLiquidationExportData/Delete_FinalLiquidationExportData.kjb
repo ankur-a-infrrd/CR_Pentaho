@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Delete_FeedGroup</name>
+  <name>Delete_FinalLiquidationExportData</name>
   <description />
   <extended_description />
   <job_version />
   <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/01/05 11:43:00.257</created_date>
+  <created_date>2018/02/21 17:39:57.762</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2018/01/05 11:43:00.257</modified_date>
+  <modified_date>2018/02/21 17:39:57.762</modified_date>
   <parameters>
     <parameter>
       <name>CUSTOMERID</name>
@@ -293,32 +293,12 @@
   <shared_objects_file />
   <entries>
     <entry>
-      <name>START</name>
-      <description />
-      <type>SPECIAL</type>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
-    </entry>
-    <entry>
-      <name>FeedGroup</name>
+      <name>FinalLiquidationExportData</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/FeedGroup.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/FinalLiquidationExportData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -350,16 +330,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>96</yloc>
+      <xloc>496</xloc>
+      <yloc>176</yloc>
     </entry>
     <entry>
-      <name>Delete-FeedGroup</name>
+      <name>Delete_FinalLiquidationExportData</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Job.Filename.Directory}/Delete_FeedGroup.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/Delete_FinalLiquidationExportData.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>Y</params_from_previous>
@@ -383,22 +363,42 @@
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
-          <name>feedGroupID</name>
-          <stream_name>feedGroupID</stream_name>
+          <name>finalLiquidationExportDataID</name>
+          <stream_name>finalLiquidationExportDataID</stream_name>
           <value />
         </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>96</yloc>
+      <xloc>736</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>START</name>
+      <description />
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>272</xloc>
+      <yloc>176</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>FeedGroup</to>
+      <to>FinalLiquidationExportData</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -406,8 +406,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>FeedGroup</from>
-      <to>Delete-FeedGroup</to>
+      <from>FinalLiquidationExportData</from>
+      <to>Delete_FinalLiquidationExportData</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

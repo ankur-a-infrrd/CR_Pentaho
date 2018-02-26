@@ -435,6 +435,32 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>Reference tables that are to be ignored during 
+the load has to be put int the not in where clause 
+of Table input sql statement.
+
+Also, the tables whose data is not to be migrated 
+as part of QA refresh.</note>
+      <xloc>48</xloc>
+      <yloc>240</yloc>
+      <width>340</width>
+      <heigth>130</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>cr_cust_fk_check_off</name>
@@ -557,8 +583,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>459</xloc>
-      <yloc>141</yloc>
+      <xloc>512</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -579,7 +605,11 @@
     WHERE COLUMN_NAME IN ('CustomerID')
         AND TABLE_SCHEMA='${CR_CUST_DB_NAME}' AND TABLE_NAME LIKE 'tbl_%' AND TABLE_NAME not in ('tbl_CustomerDirectPayBankAccount',
 'tbl_PersonDirectPayCreditCard','tbl_PersonDirectPayBankAccount','tbl_PersonYodleeCreditCard','tbl_QueueEntryDirectPayExportCustomer','tbl_CustomerPublicKey','tbl_PublicKey','tbl_KratosEntity',
-'tbl_KratosMachine','tbl_AuthorizedUser','tbl_CustomerSamlSSO','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_EncryptedPersonLookup','tbl_BusinessRules','tbl_CustomerData');</sql>
+'tbl_KratosMachine','tbl_AuthorizedUser','tbl_CustomerSamlSSO','tbl_EncryptionKey','tbl_ScriptConverterConfig','tbl_EncryptedPersonLookup','tbl_BusinessRules','tbl_BusinessRulesImpl','tbl_CustomerData',
+'tbl_Country','tbl_Language','tbl_Currency','tbl_CreditCardType','tbl_Deployment','tbl_Dump','tbl_EmailMessageTO','tbl_EmailTemplate','tbl_YodleeTerms','tbl_CountryLanguage','tbl_FeedProviderConfig','tbl_ProviderTnC',
+'tbl_ReportDefinitionColumn','tbl_ReportDefinitionFilter','tbl_z_RoutingRequeue','tbl_LegalHoliday','tbl_IntegrationType','tbl_ImageButtonsFiles','tbl_Help','tbl_HCPGuest','tbl_GuestType','tbl_FeedType',
+'tbl_ExpenseTransaction_PreLoadErrorType','tbl_MetaData_Columns','tbl_MetaData_Tables','tbl_ModulusWeight','tbl_Provider','tbl_ReportDefinition','tbl_SolVersions','tbl_SortingCodeSubstitution',
+'tbl_TravelItem_VendorLookup','tbl_TravelItemRailVendor','z_umsg');</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
