@@ -398,8 +398,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>496</yloc>
+      <xloc>528</xloc>
+      <yloc>656</yloc>
     </entry>
     <entry>
       <name>GetSchemaTablesWithCustomerID</name>
@@ -434,8 +434,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>496</yloc>
+      <xloc>720</xloc>
+      <yloc>656</yloc>
     </entry>
     <entry>
       <name>START</name>
@@ -737,8 +737,8 @@ DATA CLEAN JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>496</yloc>
+      <xloc>320</xloc>
+      <yloc>656</yloc>
     </entry>
     <entry>
       <name>CreateBackupETLSchema</name>

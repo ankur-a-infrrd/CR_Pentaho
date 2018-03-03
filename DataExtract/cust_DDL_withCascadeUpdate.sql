@@ -15,8 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-set global innodb_large_prefix=on;
-
 use chrome_expense_etl;
 
 CREATE TABLE `tbl_AnalyticsControlOptions` (
@@ -389,7 +387,7 @@ CREATE TABLE `tbl_BudgetDetail` (
   `Encumbered` tinyint(1) DEFAULT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Type` enum('ENCM','LQDN','FLQDN') DEFAULT NULL,
+  `Type` enum('ENCM','LQDN') NOT NULL DEFAULT 'ENCM',
   `RuleCode` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`BudgetDetailID`),
   KEY `CustomerID` (`CustomerID`),
@@ -902,8 +900,8 @@ CREATE TABLE `tbl_CustomerData` (
   `EnableIOSLogin` tinyint(1) NOT NULL DEFAULT '0',
   `IsUsingBasicStatements` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Denotes if a customer is configured for bank statement grouping',
   `PersonalCreditCardEnabled` tinyint(1) DEFAULT '0' COMMENT 'Enables config screen for personal credit card integration set up',
-  `IsPaidNotifyDelegate` tinyint(1) DEFAULT '0',
-  `IsPaidNotifyCreator` tinyint(1) DEFAULT '1',
+  `IsPaidNotifyDelegate` tinyint(1) NOT NULL DEFAULT '0',
+  `IsPaidNotifyCreator` tinyint(1) NOT NULL DEFAULT '0',
   `UseProsper` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Enable access to PROSPER application',
   `ExpenseRulesDefaultPersonID` int(11) NOT NULL DEFAULT '-1',
   `PreApprovalRulesDefaultPersonID` int(11) NOT NULL DEFAULT '-1',
@@ -1096,7 +1094,10 @@ CREATE TABLE `tbl_CustomerSamlSSO` (
   `AssertionEncrypted` tinyint(4) NOT NULL DEFAULT '0',
   `PrivateKeyName` varchar(50) DEFAULT NULL,
   `StrictValidation` tinyint(4) NOT NULL DEFAULT '0',
-  `UserIdentifier` varchar(50) DEFAULT NULL
+  `UserIdentifier` varchar(50) DEFAULT NULL COMMENT 'Custom attribute to authenticate a user',
+  PRIMARY KEY (`SamlCustomerCompanyID`),
+  KEY `FK_CustomerSamlSSO_1` (`CustomerID`),
+  CONSTRAINT `FK_CustomerSamlSSO_1` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_CustomerSubscription` (
@@ -2052,47 +2053,6 @@ CREATE TABLE `tbl_ExpenseImage` (
   CONSTRAINT `FK_tbl_ExpenseImage_CustId` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=340483422 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tbl_ExpenseImageMerchantDetails` (
-  `MerchantDetailsID` varchar(50) NOT NULL,
-  `ImageID` varchar(11) NOT NULL,
-  `Country` varchar(50) DEFAULT NULL,
-  `CountryCode` varchar(3) DEFAULT NULL,
-  `State` varchar(50) DEFAULT NULL,
-  `StateCode` varchar(3) DEFAULT NULL,
-  `Street` varchar(256) DEFAULT NULL,
-  `City` varchar(50) DEFAULT NULL,
-  `ZipCode` varchar(12) DEFAULT NULL,
-  `PhoneNumber` varchar(12) DEFAULT NULL,
-  `Website` varchar(45) DEFAULT NULL,
-  `AddressLine` varchar(512) DEFAULT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `PersonID` int(11) NOT NULL,
-  `CreateDate` date DEFAULT NULL,
-  `UpdateDate` date DEFAULT NULL,
-  PRIMARY KEY (`MerchantDetailsID`),
-  KEY `fk_ExpenseImageID_idx` (`ImageID`),
-  KEY `fk_ExpenseImageID_idx1` (`ImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `tbl_ExpenseImageVatDetails` (
-  `VatComponentID` varchar(36) NOT NULL,
-  `ImageID` int(11) unsigned NOT NULL,
-  `PersonID` int(11) NOT NULL,
-  `VatAmount` decimal(11,2) DEFAULT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `VatTaxCode` varchar(100) DEFAULT NULL,
-  `VatTaxPercentage` decimal(11,3) DEFAULT NULL,
-  `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`VatComponentID`),
-  KEY `FK_tbl_ExpenseImageVatDetails_CustId` (`CustomerID`),
-  KEY `FK_tbl_ExpenseImageVatDetails_ImageId` (`ImageID`),
-  KEY `FK_tbl_ExpenseImageVatDetails_PersonId` (`PersonID`),
-  CONSTRAINT `FK_tbl_ExpenseImageVatDetails_CustId` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_tbl_ExpenseImageVatDetails_ImageId` FOREIGN KEY (`ImageID`) REFERENCES `tbl_ExpenseImage` (`ImageID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_tbl_ExpenseImageVatDetails_PersonId` FOREIGN KEY (`PersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `tbl_ExpensePreAuthorization` (
   `CrInternalID` int(11) NOT NULL AUTO_INCREMENT,
   `ExternalRequestID` varchar(50) NOT NULL,
@@ -3026,7 +2986,7 @@ CREATE TABLE `tbl_ExpenseTransaction` (
   `CustomerID` int(11) NOT NULL,
   `FeedID` int(11) DEFAULT NULL,
   `PersonID` int(11) DEFAULT NULL,
-  `FeedTransactionUniqueID` varchar(255) DEFAULT NULL,
+  `FeedTransactionUniqueId` varchar(360) DEFAULT NULL,
   `CreateDate` datetime NOT NULL,
   `TransactionDate` datetime NOT NULL,
   `StatementDate` datetime DEFAULT NULL,
@@ -3097,7 +3057,6 @@ CREATE TABLE `tbl_ExpenseTransaction` (
   KEY `FK_tbl_ExpenseTransaction_6` (`PersonID`),
   KEY `FK_tbl_ExpenseTransaction_tbl_Country` (`Country_Alpha2`),
   KEY `Idx_ExpenseTransaction_BatchId` (`BatchPID`),
-  KEY `Idx_FeedTransactionUniqueID` (`FeedTransactionUniqueID`),
   KEY `Idx_tbl_ExpenseTransaction_ExpenseReportHeaderID` (`ExpenseReportHeaderID`),
   KEY `FK_tbl_ExpenseTransaction_tbl_ExpenseReportHeader` (`CustomerID`,`ExpenseReportHeaderID`),
   KEY `FK_tbl_ExpenseTransaction_TranCorpAccountID` (`TransactionCorporateAccountID`),
@@ -3468,7 +3427,7 @@ CREATE TABLE `tbl_FeedProcessInfo` (
   `FeedProcessInfoID` int(11) NOT NULL AUTO_INCREMENT,
   `CustomerID` int(11) NOT NULL,
   `FeedType` varchar(50) NOT NULL,
-  `Status` enum('PROCESSED','THRESHOLD_FAILED') DEFAULT NULL,
+  `Status` enum('PROCESSED','THRESHOLD_FAILED') NOT NULL,
   `FileName` varchar(255) NOT NULL,
   `ProcessID` varchar(100) NOT NULL,
   `ProcessDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -3482,10 +3441,9 @@ CREATE TABLE `tbl_FeedProcessInfo` (
   `S3Path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`FeedProcessInfoID`),
   UNIQUE KEY `ProcessID` (`ProcessID`),
-  KEY `FK_FeedProcessInfo_PersonID` (`OverrideByPersonID`),
-  KEY `FK_FeedProcessInfo_CustomerID` (`CustomerID`),
-  CONSTRAINT `FK_FeedProcessInfo_CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_FeedProcessInfo_PersonID` FOREIGN KEY (`OverrideByPersonID`) REFERENCES `tbl_Person` (`PersonID`) ON UPDATE CASCADE
+  KEY `FK_FeedProcessInfo_PersonID_2` (`CustomerID`,`OverrideByPersonID`),
+  CONSTRAINT `FK_FeedProcessInfo_CustomerID_2` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
+  CONSTRAINT `FK_FeedProcessInfo_PersonID_2` FOREIGN KEY (`CustomerID`,`OverrideByPersonID`) REFERENCES `tbl_Person` (`CustomerID`, `PersonID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_FeedProviderConfig` (
@@ -3524,7 +3482,7 @@ CREATE TABLE `tbl_FeedType` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_FinalLiquidationExport` (
-  `FinalLiquidationExportID` varchar(36) NOT NULL DEFAULT '',
+  `FinalLiquidationExportID` varchar(36) NOT NULL,
   `CustomerID` int(11) NOT NULL,
   `CreateDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ExportDate` datetime DEFAULT NULL,
@@ -3534,9 +3492,9 @@ CREATE TABLE `tbl_FinalLiquidationExport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_FinalLiquidationExportData` (
-  `FinalLiquidationExportDataID` varchar(36) NOT NULL DEFAULT '',
-  `FinalLiquidationExportID` varchar(36) NOT NULL DEFAULT '',
-  `PAHeaderID` char(36) NOT NULL DEFAULT '',
+  `FinalLiquidationExportDataID` varchar(36) NOT NULL,
+  `FinalLiquidationExportID` varchar(36) NOT NULL,
+  `PAHeaderID` char(36) NOT NULL,
   PRIMARY KEY (`FinalLiquidationExportDataID`),
   UNIQUE KEY `UIDX_FLExportData_PAHeaderID` (`PAHeaderID`),
   KEY `FK_FinalLiquidationExportData_FinalLiquidationExport` (`FinalLiquidationExportID`),
@@ -5211,28 +5169,6 @@ CREATE TABLE `tbl_LineItemUserDefinedData` (
   CONSTRAINT `FK_tbl_LineItemUserDefinedData__tbl_Entity` FOREIGN KEY (`EntityValue`) REFERENCES `tbl_Entity` (`EntityID`) ON UPDATE CASCADE,
   CONSTRAINT `tbl_LineItemUserDefinedData_ibfk_1` FOREIGN KEY (`ExpenseReportLineItemID`) REFERENCES `tbl_ExpenseReportLineItem` (`ExpenseReportLineItemID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `tbl_LiquidationExport` (
-  `LiquidationExportID` varchar(36) NOT NULL DEFAULT '',
-  `CustomerID` int(11) NOT NULL,
-  `CreateDate` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ExportedDate` date DEFAULT NULL,
-  `IsExported` tinyint(1) NOT NULL DEFAULT '0',
-  `ChainID` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`LiquidationExportID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `tbl_LiquidationExportData` (
-  `LiquidationExportDataID` varchar(36) NOT NULL DEFAULT '',
-  `LiquidationExportID` varchar(36) NOT NULL DEFAULT '',
-  `ExpenseReportLineItemID` char(36) NOT NULL DEFAULT '',
-  PRIMARY KEY (`LiquidationExportDataID`),
-  UNIQUE KEY `UIDX_LExportData_ExpenseReportLineItemID` (`ExpenseReportLineItemID`),
-  KEY `FK_LiquidationExportData_LiquidationExport` (`LiquidationExportID`),
-  CONSTRAINT `FK_LExportData_ERLineItem` FOREIGN KEY (`ExpenseReportLineItemID`) REFERENCES `tbl_ExpenseReportLineItem` (`ExpenseReportLineItemID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_LiquidationExportData_LiquidationExport` FOREIGN KEY (`LiquidationExportID`) REFERENCES `tbl_LiquidationExport` (`LiquidationExportID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `tbl_Location` (
   `LocationCustomerID` int(11) NOT NULL,
   `Country_Alpha2` char(12) NOT NULL,
@@ -5491,8 +5427,8 @@ CREATE TABLE `tbl_MatterOnSelect` (
   `CustomerID` int(11) DEFAULT NULL,
   PRIMARY KEY (`MatterID`),
   KEY `FK_MatterOnSelect_2` (`ExpenseReportItemTypeID`),
-  CONSTRAINT `FK_MatterOnSelect_1` FOREIGN KEY (`MatterID`) REFERENCES `tbl_matter` (`MatterID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_MatterOnSelect_2` FOREIGN KEY (`ExpenseReportItemTypeID`) REFERENCES `tbl_expensereportitemtype` (`ExpenseReportItemTypeID`) ON UPDATE CASCADE
+  CONSTRAINT `FK_MatterOnSelect_1` FOREIGN KEY (`MatterID`) REFERENCES `tbl_Matter` (`MatterID`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_MatterOnSelect_2` FOREIGN KEY (`ExpenseReportItemTypeID`) REFERENCES `tbl_ExpenseReportItemType` (`ExpenseReportItemTypeID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_MatterOnSelect2` (
@@ -6107,7 +6043,7 @@ CREATE TABLE `tbl_PaidExpense` (
   `CustomerFeedID` int(11) DEFAULT NULL,
   `LineNumber` varchar(10) DEFAULT NULL,
   `BankNumber` varchar(36) DEFAULT NULL,
-  `Status` char(4) NOT NULL DEFAULT '',
+  `Status` char(4) NOT NULL,
   `VoucherInvoiceID` varchar(20) NOT NULL,
   `BatchPIDQueued` varchar(80) DEFAULT NULL,
   `PaymentType` char(4) DEFAULT NULL,
@@ -6406,7 +6342,6 @@ CREATE TABLE `tbl_PerDiemLineItem` (
   `StartDate` datetime NOT NULL,
   `EndDate` datetime NOT NULL,
   `PerDiemDayPosition` varchar(4) DEFAULT NULL,
-  `PerDiemRateID` int(11) DEFAULT NULL,
   `NumberAttendees` int(11) DEFAULT NULL,
   `MealType` varchar(15) DEFAULT NULL,
   `BaseRate` decimal(11,2) DEFAULT NULL,
@@ -6424,10 +6359,8 @@ CREATE TABLE `tbl_PerDiemLineItem` (
   PRIMARY KEY (`ExpenseReportLineItemID`,`CustomerID`),
   KEY `FK_tbl_PerDiemLineItem_1` (`CustomerID`,`ExpenseReportLineItemID`),
   KEY `FK_tbl_PerDiemLineItem_2` (`CityID`),
-  KEY `FK_tbl_PerDiemLineItem_3` (`PerDiemRateID`),
   CONSTRAINT `FK_tbl_PerDiemLineItem_1` FOREIGN KEY (`CustomerID`, `ExpenseReportLineItemID`) REFERENCES `tbl_ExpenseReportLineItem` (`CustomerID`, `ExpenseReportLineItemID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_tbl_PerDiemLineItem_2` FOREIGN KEY (`CityID`) REFERENCES `tbl_City` (`CityID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_tbl_PerDiemLineItem_3` FOREIGN KEY (`PerDiemRateID`) REFERENCES `tbl_PerDiemRate_v2` (`PerDiemRateID`) ON UPDATE CASCADE
+  CONSTRAINT `FK_tbl_PerDiemLineItem_2` FOREIGN KEY (`CityID`) REFERENCES `tbl_City` (`CityID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_PerDiemLocationHistory` (
@@ -6463,7 +6396,6 @@ CREATE TABLE `tbl_PerDiemPALineItem` (
   `CreateDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdateDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `CityID` int(11) DEFAULT NULL,
-  `PerDiemRateID` int(11) DEFAULT NULL,
   `OtherCity` varchar(50) DEFAULT NULL,
   `Hours` int(11) DEFAULT '0',
   `IsBreakfastIncludedNoReservation` tinyint(1) DEFAULT '0',
@@ -6488,11 +6420,9 @@ CREATE TABLE `tbl_PerDiemPALineItem` (
   KEY `FK_tbl_PerDiemPALineItem_1` (`CustomerID`,`PALineItemID`),
   KEY `FK_tbl_PerDiemPALineItem_2` (`CityID`),
   KEY `FK_tbl_PerDiemPALineItem_3` (`PALineItemID`),
-  KEY `FK_tbl_PerDiemPALineItem_4` (`PerDiemRateID`),
   CONSTRAINT `FK_tbl_PerDiemPALineItem_1` FOREIGN KEY (`CustomerID`, `PALineItemID`) REFERENCES `tbl_PALineItem` (`CustomerID`, `PALineItemID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_tbl_PerDiemPALineItem_2` FOREIGN KEY (`CityID`) REFERENCES `tbl_City` (`CityID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_tbl_PerDiemPALineItem_3` FOREIGN KEY (`PALineItemID`) REFERENCES `tbl_PALineItem` (`PALineItemID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_tbl_PerDiemPALineItem_4` FOREIGN KEY (`PerDiemRateID`) REFERENCES `tbl_PerDiemRate_v2` (`PerDiemRateID`) ON UPDATE CASCADE
+  CONSTRAINT `FK_tbl_PerDiemPALineItem_3` FOREIGN KEY (`PALineItemID`) REFERENCES `tbl_PALineItem` (`PALineItemID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_PerDiemProperties` (
@@ -7032,7 +6962,8 @@ CREATE TABLE `tbl_PersonProviderMapping` (
   KEY `FK_PersonProviderMapping_Person` (`PersonID`,`CustomerID`),
   KEY `FK_ProviderID_Mapping` (`ProviderID`),
   CONSTRAINT `FK_PersonProviderMapping_FeedProviderID` FOREIGN KEY (`FeedProviderID`) REFERENCES `tbl_FeedProviderConfig` (`FeedProviderID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_PersonProviderMapping_Person` FOREIGN KEY (`PersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE
+  CONSTRAINT `FK_PersonProviderMapping_Person` FOREIGN KEY (`PersonID`, `CustomerID`) REFERENCES `tbl_Person` (`PersonID`, `CustomerID`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_ProviderID_Mapping` FOREIGN KEY (`ProviderID`) REFERENCES `tbl_Provider` (`ProviderID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_PersonUDA` (
@@ -8046,6 +7977,7 @@ CREATE TABLE `tbl_QueueEntryActualEmailer` (
   KEY `IDX_tbl_QueueEntryActualEmailer_BatchPID` (`BatchPID`),
   KEY `FK_tbl_QueueEntryActualEmailer_CustomerID` (`CustomerID`),
   KEY `IDX_tbl_QueueEntryActualEmailer_QueuedDate` (`QueuedDate`),
+  KEY `IDX_tbl_QueueEntryActualEmailer_BatchPID_BatchPIDQueued` (`BatchPID`,`BatchPIDQueued`),
   CONSTRAINT `FK_CustomerID_QEAE` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -8400,27 +8332,6 @@ CREATE TABLE `tbl_QueueEntryRouting` (
   CONSTRAINT `FK_tbl_QueueEntryRouting_1` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
   CONSTRAINT `FK_tbl_QueueEntryRouting_2` FOREIGN KEY (`ExpenseReportHeaderID`) REFERENCES `tbl_ExpenseReportHeader` (`ExpenseReportHeaderID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=199178672 DEFAULT CHARSET=utf8;
-CREATE TABLE `tbl_QueueEntryRouting_test` (
-  `QueueEntryRouting_test_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CustomerID` int(11) NOT NULL,
-  `ExpenseReportHeaderID` char(36) NOT NULL DEFAULT '',
-  `QueueCode` char(4) NOT NULL,
-  `QueuedDate` datetime NOT NULL,
-  `DequeuedDate` datetime DEFAULT NULL,
-  `LockedDate` datetime DEFAULT NULL,
-  `BatchPID` char(36) DEFAULT NULL,
-  `Data` text,
-  `DevNote` varchar(100) DEFAULT NULL,
-  `BatchPIDQueued` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`QueueEntryRouting_test_ID`),
-  KEY `FK_tbl_QueueEntryRouting_test_1` (`CustomerID`),
-  KEY `IDX_tbl_QueueEntryRouting_test_1` (`ExpenseReportHeaderID`),
-  KEY `IDX_tbl_QueueEntryRouting_test_2` (`BatchPID`),
-  KEY `IDX_tbl_QueueEntryRouting_test_3` (`QueueCode`,`DequeuedDate`,`LockedDate`),
-  KEY `IDX_tbl_QueueEntryRouting_test_4` (`DequeuedDate`,`LockedDate`,`BatchPID`,`QueuedDate`),
-  CONSTRAINT `FK_tbl_QueueEntryRouting_test_1` FOREIGN KEY (`CustomerID`) REFERENCES `tbl_Customer` (`CustomerID`),
-  CONSTRAINT `FK_tbl_QueueEntryRouting_test_2` FOREIGN KEY (`ExpenseReportHeaderID`) REFERENCES `tbl_ExpenseReportHeader` (`ExpenseReportHeaderID`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3672054 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tbl_QueueEntrySolrIndexing` (
   `QueueEntrySolrIndexingID` int(11) NOT NULL AUTO_INCREMENT,
@@ -9302,29 +9213,6 @@ CREATE TABLE `tbl_TravelItemRailVendor` (
   `VendorName` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `tbl_TravelTicket` (
-  `TravelTicketID` int(11) NOT NULL AUTO_INCREMENT,
-  `TravelTransactionID` int(11) NOT NULL,
-  `TicketNumber` varchar(50) DEFAULT NULL,
-  `Status` enum('ACTIVE','VOIDED','REFUNDED') DEFAULT 'ACTIVE',
-  `CountryCode` char(3) DEFAULT NULL,
-  `DocumentUrl` text,
-  `IataNumber` varchar(25) DEFAULT NULL,
-  `InvoiceNumber` varchar(50) DEFAULT NULL,
-  `IssuingAgent` varchar(255) DEFAULT NULL,
-  `IssuingAgentLocation` varchar(255) DEFAULT NULL,
-  `IssuingAirlineName` varchar(100) DEFAULT NULL,
-  `GovernmentCountryCode` char(3) DEFAULT NULL,
-  `GovernmentFiscalId` varchar(25) DEFAULT NULL,
-  `GovernmentTaxText` varchar(255) DEFAULT NULL,
-  `GovernmentVatId` varchar(25) DEFAULT NULL,
-  `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`TravelTicketID`),
-  KEY `TravelTransactionID` (`TravelTransactionID`),
-  CONSTRAINT `tbl_TravelTicket_ibfk_1` FOREIGN KEY (`TravelTransactionID`) REFERENCES `tbl_TravelTransaction` (`TravelTransactionID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
-
 CREATE TABLE `tbl_TravelTransaction` (
   `TravelTransactionID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto-generated primary key',
   `TravelTransactionType` varchar(25) NOT NULL COMMENT 'CR Travel Item Type',
@@ -9442,8 +9330,6 @@ CREATE TABLE `tbl_TravelTransactionDetail` (
   `VehicleModel` varchar(50) DEFAULT NULL,
   `RateInfo` varchar(255) DEFAULT NULL,
   `TotalMiles` int(11) DEFAULT '0',
-  `CouponStatusCode` varchar(10) DEFAULT NULL,
-  `BookingStatusCode` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`TravelTransactionDetailID`),
   KEY `FK_tbl_TravelTransaction_tbl_TravelTransactionDetail_ID` (`TravelTransactionID`),
   KEY `FK_tbl_Customer_tbl_TravelTransactionDetail_CustomerID` (`CustomerID`),
@@ -10051,16 +9937,3 @@ CREATE TABLE `tbl_z_RoutingRequeue` (
   `procCall` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2790253 DEFAULT CHARSET=utf8;
-
-CREATE TABLE `Test` (
-  `ID` int(8) NOT NULL DEFAULT '0',
-  `NAME` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `z_umsg` (
-  `seq` int(11) NOT NULL AUTO_INCREMENT,
-  `opr` varchar(10) NOT NULL,
-  `msg` varchar(1000) DEFAULT NULL,
-  `createStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=630 DEFAULT CHARSET=utf8;

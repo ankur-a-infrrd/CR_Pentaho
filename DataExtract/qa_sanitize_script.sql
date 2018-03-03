@@ -35,7 +35,7 @@ UPDATE tbl_ReportDefinitionInstance rdi SET rdi.Schedule='NONE' WHERE rdi.Schedu
 
 UPDATE tbl_ReportDefinitionStep rds SET Value = 'other|smtp.chromefile.com|25|expense-noreply-qa@chromefile.com|workbugzilla' WHERE rds.Type = 'smtp_info';
 
-UPDATE tbl_AuditExportInvoice SET InvoiceID = CONCAT('QA',SUBSTR(InvoiceID,3)) WHERE InvoiceID like '010%';
+UPDATE tbl_AuditExportInvoice SET InvoiceID = CONCAT('PR',SUBSTR(InvoiceID,3)) WHERE InvoiceID like '010%';
 
 
 
@@ -63,12 +63,12 @@ UPDATE tbl_ExpenseReportHeader erh
 
 
 
-UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3));
-UPDATE tbl_PAHeader SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3));
-UPDATE tbl_AuditExport SET ReportID = CONCAT('QA',SUBSTR(ReportID, 3)) WHERE ReportID like '010%';
-UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('QA',SUBSTR(InvoiceID, 3));
-UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) <> '';
-UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('QA',SUBSTR(PoReqID, 3));
+UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3));
+UPDATE tbl_PAHeader SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3));
+UPDATE tbl_AuditExport SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3)) WHERE ReportID like '010%';
+UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('PR',SUBSTR(InvoiceID, 3));
+UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('PR',SUBSTR(PoReqID, 3)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) <> '';
+UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('PR',SUBSTR(PoReqID, 3));
 
 
 UPDATE tbl_AuthorizedUser SET PersonID = NULL;

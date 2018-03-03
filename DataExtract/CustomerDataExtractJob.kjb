@@ -373,7 +373,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
+      <xloc>64</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -517,7 +517,7 @@ use chrome_expense_etl;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>224</xloc>
       <yloc>80</yloc>
     </entry>
     <entry>
@@ -550,7 +550,7 @@ DATA EXTRACT JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>832</xloc>
       <yloc>256</yloc>
     </entry>
     <entry>
@@ -596,7 +596,7 @@ DATA EXTRACT JOB COMPLETED
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>576</xloc>
       <yloc>256</yloc>
     </entry>
     <entry>
@@ -652,15 +652,6 @@ DATA EXTRACT JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>DropAndCreateCustSchema</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>DropAndCreateCustSchema</from>
       <to>Execute_customer_DDLs</to>
       <from_nr>0</from_nr>
@@ -697,8 +688,8 @@ DATA EXTRACT JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Special Tables Extract</from>
-      <to>GetTableNamesForExtract</to>
+      <from>PopulateCRTables</from>
+      <to>Write To Log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -706,8 +697,17 @@ DATA EXTRACT JOB COMPLETED
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>PopulateCRTables</from>
-      <to>Write To Log</to>
+      <from>START</from>
+      <to>DropAndCreateCustSchema</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Special Tables Extract</from>
+      <to>GetTableNamesForExtract</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

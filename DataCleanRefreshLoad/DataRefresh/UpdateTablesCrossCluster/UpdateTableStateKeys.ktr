@@ -583,6 +583,10 @@
         <attribute>${CR_DEST_DB_PORT}</attribute>
       </attribute>
       <attribute>
+        <code>PREFERRED_SCHEMA_NAME</code>
+        <attribute>chrome_expense</attribute>
+      </attribute>
+      <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -620,7 +624,7 @@
     </hop>
     <hop>
       <from>Select values 2</from>
-      <to>Get Row Count - tbl_City</to>
+      <to>Get Row Count - tbl_State</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -639,7 +643,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get Row Count - tbl_City</from>
+      <from>Get Row Count - tbl_State</from>
       <to>Select values 2 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -655,7 +659,7 @@
     </hop>
   </order>
   <step>
-    <name>Get Row Count - tbl_City</name>
+    <name>Get Row Count - tbl_State</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -680,8 +684,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>128</yloc>
+      <xloc>480</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -741,8 +745,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
-      <yloc>128</yloc>
+      <xloc>1088</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -789,8 +793,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>128</yloc>
+      <xloc>320</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -822,8 +826,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>128</yloc>
+      <xloc>640</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -858,8 +862,8 @@ var updateKey = row_count + startUpdateKey + 10;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
-      <yloc>128</yloc>
+      <xloc>912</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -892,8 +896,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>128</yloc>
+      <xloc>144</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -923,8 +927,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>128</yloc>
+      <xloc>768</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -963,8 +967,8 @@ AND   TABLE_NAME   = 'tbl_State';</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1360</xloc>
-      <yloc>128</yloc>
+      <xloc>1312</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1006,8 +1010,8 @@ ORDER BY StateID ASC;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
-      <yloc>128</yloc>
+      <xloc>1312</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

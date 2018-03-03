@@ -61,12 +61,12 @@ UPDATE tbl_ExpenseReportHeader erh
 
 
 -- START DONE Staging Specific --
-UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
-UPDATE tbl_PAHeader SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5));
-UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) <> '';
-UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('STAG',SUBSTR(PoReqID, 5));
-UPDATE tbl_AuditExport SET ReportID = CONCAT('STAG',SUBSTR(ReportID, 5)) where ReportID like '010%';
-UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('STAG',SUBSTR(InvoiceID, 5));
+UPDATE tbl_ExpenseReportHeader SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3));
+UPDATE tbl_PAHeader SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3));
+UPDATE tbl_InvoiceHeader SET PoReqID = CONCAT('PR',SUBSTR(PoReqID, 3)) WHERE PoReqID IS NOT NULL AND TRIM(PoReqID) <> '';
+UPDATE tbl_PoReqHeader SET PoReqID = CONCAT('PR',SUBSTR(PoReqID, 3));
+UPDATE tbl_AuditExport SET ReportID = CONCAT('PR',SUBSTR(ReportID, 3)) where ReportID like '010%';
+UPDATE tbl_InvoiceHeader SET InvoiceID = CONCAT('PR',SUBSTR(InvoiceID, 3));
 -- END DONE Staging Specific --
 
 

@@ -450,6 +450,10 @@
     <index_tablespace />
     <attributes>
       <attribute>
+        <code>EXTRA_OPTION_MYSQL.useSSL</code>
+        <attribute>false</attribute>
+      </attribute>
+      <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
         <attribute>N</attribute>
       </attribute>
@@ -622,7 +626,7 @@
 'tbl_State',
 'tbl_SymmetricKey',
 'tbl_TransactionCorporateAccount',
-'tbl_UserDefinedDataPivot');</sql>
+'tbl_UserDefinedDataPivot','z_umsg');</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -636,7 +640,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>128</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
