@@ -61,7 +61,8 @@
       </attribute>
       <attribute>
         <code>SQL_CONNECT</code>
-        <attribute>SET FOREIGN_KEY_CHECKS = 0;</attribute>
+        <attribute>SET FOREIGN_KEY_CHECKS = 0;
+SET max_allowed_packet=468435456;</attribute>
       </attribute>
       <attribute>
         <code>STREAM_RESULTS</code>
